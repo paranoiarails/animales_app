@@ -1,0 +1,62 @@
+<h1>Añadir Perfil persona</h1>
+
+
+
+<!h1>
+<!= @persona.perfil.create %>
+<!h1>
+
+<%= form_for(@perfil) do |f| %>
+  <% if @perfil.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@perfil.errors.count, "error") %> prohibited this perfil from being saved:</h2>
+
+      <ul>
+      <% @perfil.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+  <select name="perfil[persona_id]"> 
+   <% @personas.each do |persona| %>
+   
+     <% if persona.perfil_id.nil? %> 
+       <option value="<%= persona.id %>" 
+         <%= 'selected' if persona.id == @perfil.persona_id %>> 
+         <%= persona.nombre %> 
+       </option> 
+     <% end %>
+
+   <% end %> 
+  </select></div> 
+
+  <div>
+    <p>
+       <%= f.select :ocupacion_id, @ocupacions.map {|cat| [cat.nombre, cat.id]} %>
+    </p>
+
+
+    <p>
+       <% for zona in Zona.find(:all) %>
+          <div>
+		<%= check_box_tag "perfil[zona_ids][]", zona.id, @perfil.zonas.include?(zona) %>
+		<%= zona.nombre %>
+	  </div>	   
+       <% end %>	
+    </p>
+  </div>
+
+
+  <!--div class="actions">
+    <!= per.submit "New_perf", :url=> {:controller 
+<!--=> :persona, :action=> :new_perf} %>
+  </div-->
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+

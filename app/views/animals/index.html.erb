@@ -1,0 +1,73 @@
+<h1>Listing animals</h1>
+
+  <td><%= @auxx %></td>
+
+<table>
+  <tr>
+    <th>Foto</th>
+    <th>Nombre</th>
+    <th>Chenil</th>	
+    <th>Raza</th>
+    <th>Sexo</th>
+    <th>Fecha entrada</th>
+    <th>Observaciones</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @zonas.each do |zona| %>
+ <tr>
+  <td>Zona</td>
+  <td><%= zona.nombre %></td>
+ </tr>
+<% @chenils.each do |chenil| %>
+<% if chenil.zona_id == zona.id %>
+  <% @cont=0 %>  
+ <tr>
+  <th>Chenil</th>
+  <td><%= chenil.numero %></td>
+  <th>Zona</th>
+  <td><%= chenil.zona.nombre %></td>
+  <th>Ocupado</th>
+  <td><%= chenil.ocupado %></td>
+  <td><%= link_to 'Show', chenil %></td>
+  <td><%= link_to 'Edit', edit_chenil_path(chenil) %></td>
+ </tr>
+ <% @animals.each do |animal| %>
+  <% if chenil.id == animal.chenil_id %> 
+    <% @cont=@cont+1 %>  
+  <tr>
+    <td><%= image_tag animal.foto.url(:thumb) %>
+    <td><%= animal.nombre %></td>
+    <td><%= animal.chenil_id %></td>
+    <td><%= animal.raza %></td>
+    <td><%= animal.sexo %></td>
+    <td><%= animal.fecha_entrada %></td>
+    <td><%= animal.observaciones %></td>
+  <td><%= link_to 'relaciones', :action=> "relacionesXanimal", :id=> animal.id %></td>
+  <td><%= link_to 'mover animal', :action=> "mover", :id=> animal.id %></td>
+<!--  <td><= link_to 'relacion', :action=> "relaciones", :id=> animal.id ></td> -->
+    <td><%= link_to 'Show', animal %></td>
+    <td><%= link_to 'Edit', edit_animal_path(animal) %></td>
+    <td><%= link_to 'Destroy', animal, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+  <% end %>
+ <% end %>
+
+<td><%= @cont %></td>
+<% chenil.ocupado = @cont %>
+<td><%= chenil.ocupado %></td>
+<% chenil.caplibre=(chenil.capacidad - @cont) %>
+    <% chenil.save %>
+
+
+<% end %>
+
+<%end%>
+<%end%>
+</table>
+
+<br />
+
+<%= link_to 'New Animal', new_animal_path %>

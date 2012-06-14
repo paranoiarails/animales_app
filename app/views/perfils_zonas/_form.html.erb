@@ -1,0 +1,25 @@
+<%= form_for(@perfils_zona) do |f| %>
+  <% if @perfils_zona.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@perfils_zona.errors.count, "error") %> prohibited this perfils_zona from being saved:</h2>
+
+      <ul>
+      <% @perfils_zona.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :perfil_id %><br />
+    <%= f.number_field :perfil_id %>
+  </div>
+  <div class="field">
+    <%= f.label :zona_id %><br />
+    <%= f.number_field :zona_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

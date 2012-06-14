@@ -1,0 +1,23 @@
+<h1>Listing ocupacions</h1>
+
+<table>
+  <tr>
+    <th>Nombre</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @ocupacions.each do |ocupacion| %>
+  <tr>
+    <td><%= ocupacion.nombre %></td>
+    <td><%= link_to 'Show', ocupacion %></td>
+    <td><%= link_to 'Edit', edit_ocupacion_path(ocupacion) %></td>
+    <td><%= link_to 'Destroy', ocupacion, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Ocupacion', new_ocupacion_path %>

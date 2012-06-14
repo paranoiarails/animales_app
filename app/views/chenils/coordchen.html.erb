@@ -1,0 +1,50 @@
+<h1>Listing chenils</h1>
+
+<table>
+  <tr>
+    <th>Zona</th>
+    <th>Numero</th>
+    <th>Id</th>
+    <th>Ocupado</th>
+    <th>Capacidad</th>
+    <th>Caplibre</th>
+    <th>Notas</th>
+    <th>Estado</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @zonas.each do |zona| %>
+<% @chenils.each do |chenil| %>
+  <% if zona.id == chenil.zona_id %> 
+  <tr>
+    <td><%= chenil.zona_id %></td>
+    <td><%= chenil.numero %></td>
+    <td><%= chenil.id %></td>
+    <td><%= chenil.ocupado %></td>
+    <td><%= chenil.capacidad %></td>
+    <td><%= chenil.caplibre %></td>
+    <td><%= chenil.notas %></td>
+    <td><%= chenil.estado %></td>
+    <td><%= link_to 'Show', chenil %></td>
+    <td><%= link_to 'Edit', edit_chenil_path(chenil) %></td>
+    <td><%= link_to 'Destroy', chenil, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to "delete", chenil_path(chenil), :method => :delete, :confirm => "Are you sure?" %></td>
+
+<tr>
+  <td>What does the M stand for in MVC?</td>
+  <td>model</td>
+  <td><a href="/spam_questions/1/edit">Edit</a></td>
+  <td><a href="/spam_questions/1" data-confirm="Are you sure?" data-method="delete" rel="nofollow">Destroy</a></td>
+</tr>
+
+  </tr>
+  <% end %>
+<% end %>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Chenil', new_chenil_path %>

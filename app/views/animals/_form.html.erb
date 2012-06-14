@@ -1,0 +1,56 @@
+<%= form_for(@animal) do |f| %>
+  <% if @animal.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@animal.errors.count, "error") %> prohibited this animal from being saved:</h2>
+
+      <ul>
+      <% @animal.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :nombre %><br />
+    <%= f.text_field :nombre %>
+  </div>
+  <div class="field">
+    <%= f.label :raza %><br />
+    <%= f.text_field :raza %>
+  </div>
+  <div class="field">
+    <%= f.label :sexo %><br />
+    <%= f.text_field :sexo %>
+  </div>
+
+  <div>
+  <select name="animal[chenil_id]"> 
+   <% @chenils.each do |chenil| %> 
+       <option value="<%= chenil.id %>" 
+         <%= 'selected' if chenil.id == @animal.chenil_id %>> 
+         <%= chenil.id %>
+         <%= chenil.numero %>
+         <%= chenil.zona_id %> 
+         
+       </option> 
+   <% end %> 
+  </select></div>
+
+  <div class="field">
+	<%= f.label :Foto %><br />
+  	<%= f.file_field :foto %>
+  </div> 
+
+  <div class="field">
+    <%= f.label :fecha_entrada %><br />
+    <%= f.date_select :fecha_entrada %>
+  </div>
+  <div class="field">
+    <%= f.label :observaciones %><br />
+    <%= f.text_area :observaciones %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

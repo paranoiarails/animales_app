@@ -1,0 +1,25 @@
+<header>
+<%= image_tag("logo.png", :alt => "Protectora Animales Málaga", :class => "round") %>
+
+<nav class="round">
+<ul>
+<li><%= link_to "Zonas", zonas_path %></li>
+<li><%= link_to "Cheniles", chenils_path %></li>
+<li><%= link_to "Animales", animals_path %></li>
+<li><%= link_to "Relación Animales", relacion_animals_path %></li>
+<li><%= link_to "Personal", personas_path %></li>
+<% if signed_in? %>
+  <li><%= link_to "Sign out", signout_path, :method => :delete %></li>
+<% else %>
+  <li><%= link_to "Sign in", signin_path %></li>
+<% end %>
+</ul>
+</nav>
+
+
+<ul>
+<h1>Protectora Animales Málaga</h1>
+</ul>
+
+</header>
+

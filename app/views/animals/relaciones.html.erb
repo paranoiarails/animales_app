@@ -1,0 +1,54 @@
+
+
+<%= form_for(@relacion_animal) do |f| %>
+  <% if @relacion_animal.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@relacion_animal.errors.count, "error") %> prohibited this relacion_animal from being saved:</h2>
+
+      <ul>
+      <% @relacion_animal.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+<!--   if @z == animal.chenil.zona_id   -->
+ 
+
+  <div>
+  <select name="relacion_animal[animal1_id]"> 
+   <% @animals.each do |animal| %> 
+       <option value="<%= animal.id %>" 
+         <%= 'selected' if @animal.id == animal.id %>> 
+         <%= animal.nombre %> 
+       </option> 
+   <% end %> 
+  <td>< relacion_animal.animal.chenil.zona_id </td>
+  </select></div> 
+
+
+  <div>
+  <select name="relacion_animal[animal2_id]"> 
+   <% @animals.each do |animal| %> 
+     <%if animal.chenil.zona_id == @animal.chenil.zona_id && animal.id != @animal.id %>
+       <option value="<%= animal.id %>" 
+         <%= 'selected' if animal.chenil.zona_id == @animal.chenil.zona.id %>>
+         <%= animal.nombre %> 
+         <%= animal.chenil.zona.nombre %>
+       </option> 
+     <%end%>
+   <% end %> 
+  </select></div> 
+
+    <div class="field">
+    <%= f.label :relacion %><br />
+    <%= f.number_field :relacion %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+
+<%end%>

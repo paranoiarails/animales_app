@@ -1,0 +1,32 @@
+<%= form_for(@probo) do |f| %>
+  <% if @probo.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@probo.errors.count, "error") %> prohibited this probo from being saved:</h2>
+
+      <ul>
+      <% @probo.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :nombre %><br />
+    <%= f.text_field :nombre %>
+  </div>
+
+    <p>
+       <% for proba in Proba.find(:all) %>
+          <div>
+		<%= check_box_tag "probo[proba_ids][]", proba.id, @probo.probas.include?(proba) %>
+		<%= proba.nombre %>
+	  </div>	   
+       <% end %>	
+    </p>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

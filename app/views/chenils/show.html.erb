@@ -1,0 +1,37 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Zona:</b>
+  <%= @chenil.zona_id %>
+</p>
+
+<p>
+  <b>Ocupado:</b>
+  <%= @chenil.ocupado %>
+</p>
+
+<p>
+  <b>Capacidad:</b>
+  <%= @chenil.capacidad %>
+</p>
+
+<p>
+  <b>Caplibre:</b>
+  <%= @chenil.caplibre %>
+</p>
+
+<p>
+  <b>Notas:</b>
+  <%= @chenil.notas %>
+</p>
+
+<p>
+  <b>Estado:</b>
+  <%= @chenil.estado %>
+</p>
+
+si modo coordinador Links a zona coordinador
+si no Links a zona personal
+<p></p>
+<%= link_to 'Edit', edit_chenil_path(@chenil) %> |
+<%= link_to 'Back', chenils_path %>

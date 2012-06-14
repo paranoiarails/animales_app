@@ -1,0 +1,63 @@
+
+<tr>
+<td><%= link_to 'nueva relacion', :action=> "relaciones", :id=> @animal.id %></td>
+</tr>
+
+  <tr>
+    <td><th><%= @animal.id %></th></td>
+    <td><%= @animal.nombre %></td>
+    <td><%= @zona %></td>
+ <!--   <td><= @zona.nombre ></td> -->
+  </tr>
+
+
+<table>
+  <tr>
+    <th>Zona animal1</th>
+    <th>Id relacion</th>
+    <th>Animal1</th>
+    <th>Nombre Animal1</th>
+    <th>Foto Animal1</th>
+    <th>Animal2</th>
+    <th>Relacion</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+
+
+ <% @relacion_animals.each do |relacion_animal| %>
+  <% if (@animal.id == relacion_animal.animal1_id || @animal.id == relacion_animal.animal2_id) %> 
+ 
+
+
+
+
+  <tr>
+    <td><%= relacion_animal.animal.chenil.zona.nombre %>
+    <td><%= relacion_animal.id %></td>
+    <td><%= relacion_animal.animal1_id %></td>
+    <td><%= relacion_animal.animal.nombre %></td>
+    <td><%= image_tag relacion_animal.animal.foto.url(:thumb) %>
+    <td><%= relacion_animal.animal2_id %></td>
+    <td><%= relacion_animal.relacion %></td>
+    <td><%= link_to 'Show', relacion_animal %></td>
+    <td><%= link_to 'Edit', edit_relacion_animal_path(relacion_animal) %></td>
+    <td><%= link_to 'Destroy', relacion_animal, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+
+  <%end%>
+ <%end%>
+</table>
+
+
+
+
+
+
+
+
+
+
+

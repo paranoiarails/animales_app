@@ -1,0 +1,23 @@
+<h1>Listing probas</h1>
+
+<table>
+  <tr>
+    <th>Nombre</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @probas.each do |proba| %>
+  <tr>
+    <td><%= proba.nombre %></td>
+    <td><%= link_to 'Show', proba %></td>
+    <td><%= link_to 'Edit', edit_proba_path(proba) %></td>
+    <td><%= link_to 'Destroy', proba, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Proba', new_proba_path %>

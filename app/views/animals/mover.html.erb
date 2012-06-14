@@ -1,0 +1,98 @@
+
+<table>
+  <tr>
+    <th>Id</th>
+    <th>Nombre</th>
+    <th>Foto</th>
+    <th>Zona</th>
+    <th>Chenil</th>
+    <th></th>
+    <th></th>    
+  </tr>
+
+  <tr>
+    <td><%= @animal.id %></td>
+    <td><%= @animal.nombre %></td>
+    <td><%= image_tag @animal.foto.url(:thumb) %>
+
+    <td><%= @animal.chenil.zona.nombre %></td>
+    <td><%= @animal.chenil.numero %></td>
+ <!--   <td><= @zona.nombre ></td> -->
+  </tr>
+</table>
+
+
+<table>
+  <tr>
+    <th>Id relacion</th>
+    <th>Id_Animal</th>
+    <th>Nombre</th>
+    <th>Foto</th>
+    <th>Relacion</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+
+ <% @chenils.each do |chenil| %>
+  <% if chenil.zona_id == @animal.chenil.zona_id %>
+
+ <tr>
+  <th>Chenil</th>
+  <td><%= chenil.numero %></td>
+  <th>Zona</th>
+  <td><%= chenil.zona.nombre %></td>
+ </tr>
+
+   <% @cont=0 %>
+
+<% @relacion_animals.each do |relacion_animal| %>
+  <% if ((@animal.id == relacion_animal.animal1_id) && (relacion_animal.animal2.chenil_id == chenil.id)) %> 
+  <%@cont=@cont+1%>
+  <tr>
+    <td><%= relacion_animal.id %></td>
+    <td><%= relacion_animal.animal2_id %></td>
+    <td><%= relacion_animal.animal2.nombre %></td>
+    <td><%= image_tag relacion_animal.animal2.foto.url(:thumb) %>
+    <td><%= relacion_animal.relacion %></td>
+    <td><%= link_to 'Show', relacion_animal %></td>
+    <td><%= link_to 'Edit', edit_relacion_animal_path(relacion_animal) %></td>
+    <td><%= link_to 'Destroy', relacion_animal, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+ 
+   
+ <%end%>
+
+  <% if ( @animal.id == relacion_animal.animal2_id && relacion_animal.animal.chenil_id == chenil.id)  %> 
+  <%@cont=@cont+1%>
+  <tr>
+    <td><%= relacion_animal.id %></td>
+    <td><%= relacion_animal.animal1_id %></td>
+    <td><%= relacion_animal.animal.nombre %></td>
+    <td><%= image_tag relacion_animal.animal.foto.url(:thumb) %>
+    <td><%= relacion_animal.relacion %></td>
+    <td><%= link_to 'Show', relacion_animal %></td>
+    <td><%= link_to 'Edit', edit_relacion_animal_path(relacion_animal) %></td>
+    <td><%= link_to 'Destroy', relacion_animal, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+  </tr>  
+
+  <%end%>
+
+
+
+ <%end%>
+   <td><%= @cont%></td>
+
+  <%end%>
+ <%end%>
+
+</table>
+
+
+
+
+
+
+

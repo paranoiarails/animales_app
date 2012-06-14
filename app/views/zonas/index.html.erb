@@ -1,0 +1,44 @@
+<h1>Listing zonas</h1>
+
+<tr>
+<td><%= link_to 'Zona Coordinador', :action=> "coord" %></td>
+</tr>
+
+<table>
+  <tr>
+    <th>Nombre</th>
+    <th>Notas</th>
+    <th>Text</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @zonas.each do |zona| %>
+  <% if zona.id >2 %>
+  <tr>
+    <td><%= zona.nombre %></td>
+    <td><%= zona.notas %></td>
+    <td><%= zona.text %></td>
+    <td><%= link_to 'cheniles', :action=> "cheniles", :id=> zona.id %></td>
+    <td><%= link_to 'Show', zona %></td>
+  </tr>
+  <%end%>
+<% end %>
+
+<% @zonas.each do |zona| %>
+  <% if zona.id<=2 %>
+  <tr>
+    <td><%= zona.nombre %></td>
+    <td><%= zona.notas %></td>
+    <td><%= zona.text %></td>
+    <td><%= link_to 'cheniles', :action=> "cheniles", :id=> zona.id %></td>
+    <td><%= link_to 'Show', zona %></td>
+  </tr>
+  <%end%>
+<% end %>
+</table>
+
+<br />
+
+

@@ -1,0 +1,36 @@
+<h1>Listing chenils</h1>
+
+<table>
+  <tr>
+    <th>Zona</th>
+    <th>Numero</th>
+    <th>Ocupado</th>
+    <th>Capacidad</th>
+    <th>Caplibre</th>
+    <th>Notas</th>
+    <th>Estado</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @chenils.each do |chenil| %>
+  <% if @zona.id == chenil.zona_id %> 
+  <tr>
+    <td><%= @zona.nombre %></td>
+    <td><%= chenil.numero %></td>
+    <td><%= chenil.ocupado %></td>
+    <td><%= chenil.capacidad %></td>
+    <td><%= chenil.caplibre %></td>
+    <td><%= chenil.notas %></td>
+    <td><%= chenil.estado %></td>
+    <td><%= link_to 'Show', chenil %></td>
+
+  </tr>
+  <% end %>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Back', zonas_path %> 

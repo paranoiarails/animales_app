@@ -1,0 +1,31 @@
+<h1>Listing probos</h1>
+
+<table>
+  <tr>
+    <th>Id</th>
+    <th>Nombre</th>
+    <th>Probas</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @probos.each do |probo| %>
+  <tr>
+    <td><%= probo.id %></td>
+    <td><%= probo.nombre %></td>
+<td>
+<% probo.probas.each do |proba| %>
+<%= proba.id %> ,
+<% end %>
+</td>
+    <td><%= link_to 'Show', probo %></td>
+    <td><%= link_to 'Edit', edit_probo_path(probo) %></td>
+    <td><%= link_to 'Destroy', probo, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Probo', new_probo_path %>

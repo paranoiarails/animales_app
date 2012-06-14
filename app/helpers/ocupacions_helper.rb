@@ -1,0 +1,2 @@
+module OcupacionsHelper
+end

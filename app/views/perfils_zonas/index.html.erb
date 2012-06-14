@@ -1,0 +1,25 @@
+<h1>Listing perfils_zonas</h1>
+
+<table>
+  <tr>
+    <th>Perfil</th>
+    <th>Zona</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @perfils_zonas.each do |perfils_zona| %>
+  <tr>
+    <td><%= perfils_zona.perfil_id %></td>
+    <td><%= perfils_zona.zona_id %></td>
+    <td><%= link_to 'Show', perfils_zona %></td>
+    <td><%= link_to 'Edit', edit_perfils_zona_path(perfils_zona) %></td>
+    <td><%= link_to 'Destroy', perfils_zona, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Perfils zona', new_perfils_zona_path %>

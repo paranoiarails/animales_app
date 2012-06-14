@@ -1,0 +1,53 @@
+<%= form_for(@chenil) do |f| %>
+  <% if @chenil.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@chenil.errors.count, "error") %> prohibited this chenil from being saved:</h2>
+
+      <ul>
+      <% @chenil.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :Numero %><br />
+    <%= f.number_field :numero %>
+  </div>
+ 
+  <div class="field">
+    <%= f.label :ocupado %><br />
+    <%= f.number_field :ocupado %>
+  </div>
+  <div class="field">
+    <%= f.label :capacidad %><br />
+    <%= f.number_field :capacidad %>
+  </div>
+  <div class="field">
+    <%= f.label :caplibre %><br />
+    <%= f.number_field :caplibre %>
+  </div>
+
+  <div>
+  <select name="chenil[zona_id]"> 
+   <% @zonas.each do |zona| %> 
+       <option value="<%= zona.id %>" 
+         <%= 'selected' if zona.id == @chenil.zona_id %>> 
+         <%= zona.nombre %> 
+       </option> 
+   <% end %> 
+  </select></div> 
+
+  <div class="field">
+    <%= f.label :notas %><br />
+    <%= f.text_area :notas %>
+  </div>
+  <div class="field">
+    <%= f.label :estado %><br />
+    <%= f.number_field :estado %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
