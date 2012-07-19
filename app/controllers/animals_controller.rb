@@ -2,12 +2,22 @@ class AnimalsController < ApplicationController
   # GET /animals
   # GET /animals.json
 
-  @auxx
+#before_filter :signed_in?, :except => [:index, :show]
+#407 (personal) before_filter :coorect_user, :only => [:edit, :update]
+before_filter :authenticate, :except => [:index, :show]
+before_filter :usuario_c_v_v, :only => [:destroy, :new, :edit, :mover]
+
+  Coordinador=1
+  Voluntario=2
+  Veterinario=3
+  Limpiador=4
 
   def index
     @animals = Animal.all
+  #  @animals = Animal.find(:all, :conditions => conditions)
     @chenils = Chenil.all
     @zonas = Zona.all
+    @search = Search.new	
     @cont
 
     respond_to do |format|
@@ -132,4 +142,19 @@ class AnimalsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+
+private
+
+	def usuario_c_v_v
+	   deny_destroy unless (current_persona.perfil.ocupacion_id==1 || current_persona.perfil.ocupacion_id==3 || current_persona.perfil.ocupacion_id==2)
+	end
+
+        def deny_destroy
+    	   store_location
+    	   redirect_to (animals_path), :notice => "Necesitas permisos de coordinador/veterinario/voluntario para dar de baja/alta/editar un animal."
+  	end
+
+
+
 end

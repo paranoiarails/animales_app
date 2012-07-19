@@ -18,13 +18,16 @@ class Persona < ActiveRecord::Base
 
 attr_accessor :password
 
+attr_accessible :nombre, :email, :password, :password_confirmation, :perfil_id
+
  #:foreign_key=>'perfil_id',
-       	belongs_to :perfil, :inverse_of => :persona
+#       	belongs_to :perfil, :inverse_of => :persona
 #add_index :personas, :perfil_id, :unique => true
 
- 
-	attr_accessible :nombre, :email, :password, :password_confirmation
+#before_save :encrypt_password
 
+	belongs_to :perfil, :foreign_key=>'perfil_id'
+ 
 
 	email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
@@ -42,7 +45,8 @@ attr_accessor :password
 
 validates :perfil_id, :uniqueness => {:case_sensitive => false}
 
-	before_save :encrypt_password
+#	before_create :encrypt_password
+before_save :encrypt_password
 
 	# Return true if the user's password matches the submitted 		password.
 	def has_password?(submitted_password)
@@ -68,12 +72,15 @@ validates :perfil_id, :uniqueness => {:case_sensitive => false}
 		self.salt = make_salt if new_record?
 		self.encrypted_password = encrypt(password) if password.present?
 	   end
+
 	   def encrypt(string)
 		secure_hash("#{salt}--#{string}")
 	   end
+
 	   def make_salt
 		secure_hash("#{Time.now.utc}--#{password}")
 	   end
+
 	   def secure_hash(string)
 		Digest::SHA2.hexdigest(string)
 	   end

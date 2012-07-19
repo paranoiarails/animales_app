@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120609175656) do
+ActiveRecord::Schema.define(:version => 20120710032336) do
 
   create_table "animals", :force => true do |t|
     t.string   "nombre"
@@ -40,22 +40,6 @@ ActiveRecord::Schema.define(:version => 20120609175656) do
     t.integer  "numero"
   end
 
-  create_table "dinas", :force => true do |t|
-    t.string   "nombre"
-    t.integer  "edad"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-    t.integer  "dino_id"
-  end
-
-  create_table "dinos", :force => true do |t|
-    t.integer  "dina_id"
-    t.string   "nombre"
-    t.string   "raza"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
   create_table "ocupacions", :force => true do |t|
     t.string   "nombre"
     t.datetime "created_at", :null => false
@@ -64,14 +48,19 @@ ActiveRecord::Schema.define(:version => 20120609175656) do
 
   create_table "perfils", :force => true do |t|
     t.integer  "ocupacion_id"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
-    t.integer  "persona_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "perfils_zonas", :id => false, :force => true do |t|
     t.integer "perfil_id"
     t.integer "zona_id"
+  end
+
+  create_table "pers", :force => true do |t|
+    t.string   "nombre"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "personas", :force => true do |t|
@@ -88,17 +77,8 @@ ActiveRecord::Schema.define(:version => 20120609175656) do
 
   create_table "probas", :force => true do |t|
     t.string   "nombre"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "probas_probos", :id => false, :force => true do |t|
-    t.integer "proba_id"
-    t.integer "probo_id"
-  end
-
-  create_table "probos", :force => true do |t|
-    t.string   "nombre"
+    t.string   "correo"
+    t.integer  "per_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -109,6 +89,25 @@ ActiveRecord::Schema.define(:version => 20120609175656) do
     t.integer  "relacion"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "searches", :force => true do |t|
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.string   "nombre"
+    t.integer  "zona_id"
+  end
+
+  create_table "tareas", :force => true do |t|
+    t.string   "nombre"
+    t.integer  "persona_id"
+    t.integer  "zona_id"
+    t.integer  "animal_id"
+    t.text     "texto"
+    t.integer  "ocupacion_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+    t.date     "fecha"
   end
 
   create_table "zonas", :force => true do |t|

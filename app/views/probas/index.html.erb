@@ -3,6 +3,8 @@
 <table>
   <tr>
     <th>Nombre</th>
+    <th>Correo</th>
+    <th>Per</th>
     <th></th>
     <th></th>
     <th></th>
@@ -11,7 +13,10 @@
 <% @probas.each do |proba| %>
   <tr>
     <td><%= proba.nombre %></td>
+    <td><%= proba.correo %></td>
+    <td><%= proba.per_id %></td>
     <td><%= link_to 'Show', proba %></td>
+    <td><%= link_to 'Añadir Perfil', :action=> "ad_per", :id=>proba.id %></td>
     <td><%= link_to 'Edit', edit_proba_path(proba) %></td>
     <td><%= link_to 'Destroy', proba, confirm: 'Are you sure?', method: :delete %></td>
   </tr>

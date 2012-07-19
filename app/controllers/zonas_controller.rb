@@ -1,4 +1,7 @@
 class ZonasController < ApplicationController
+  before_filter :authenticate
+  before_filter :usuario_coordinador, :only => [:destroy, :new]
+
   # GET /zonas
   # GET /zonas.json
   def index
@@ -89,4 +92,20 @@ class ZonasController < ApplicationController
       format.json { head :no_content }
     end
   end
+ 
+  private
+    def authenticate
+    deny_access unless signed_in?
+    end
+
+	def usuario_coordinador
+	   deny_destroy unless current_persona.perfil.ocupacion_id==1
+	end
+
+        def deny_destroy
+    	   store_location
+    	   redirect_to (zonas_path), :notice => "Necesitas permisos de coordinador para crear/eliminar una zona."
+  	end
+
+
 end

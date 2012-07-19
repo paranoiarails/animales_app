@@ -1,5 +1,9 @@
 class OcupacionsController < ApplicationController
-  # GET /ocupacions
+before_filter :authenticate
+before_filter :usuario_coordinador, :only => [:destroy, :edit, :new]
+
+
+ # GET /ocupacions
   # GET /ocupacions.json
   def index
     @ocupacions = Ocupacion.all
@@ -80,4 +84,17 @@ class OcupacionsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+private
+  
+	def usuario_coordinador
+	   deny_destroy unless current_persona.perfil.ocupacion_id==1 
+	end
+
+        def deny_destroy
+    	   store_location
+    	   redirect_to (ocupacions_path), :notice => "Necesitas permisos de coordinador para crear/editar/destruir una ocupacion."
+  	end
+
 end
+

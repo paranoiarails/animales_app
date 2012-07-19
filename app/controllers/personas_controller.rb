@@ -1,5 +1,10 @@
 class PersonasController < ApplicationController
-  def index
+before_filter :authenticate
+before_filter :usuario_coordinador, :only => [:destroy, :edit, :ad_perfil]
+#permisos show, edit para si mismos
+
+
+ def index
     @personas = Persona.all
 
     respond_to do |format|
@@ -25,23 +30,23 @@ class PersonasController < ApplicationController
 
   end
 
-    def new_perf
+#    def new_perf
 
-    @perfil = Perfil.new(params[:perfil])
-    @persona = Persona.find(params[:id])
+#    @perfil = Perfil.new(params[:perfil])
+#    @persona = Persona.find(params[:id])
 
-	if @perfil.save
-  	   @persona.perfil = @perfil
-           @persona.update_attributes(params[:persona])
-	   redirect_to @persona
-	end
+#	if @perfil.save
+#  	   @persona.perfil = @perfil
+#           @persona.update_attributes(params[:persona])
+#	   redirect_to @persona
+#	end
 
-    end
+#    end
 
 
   def ad_perfil
-    @persona = Persona.find(params[:id])
-    @personas = Persona.all	
+    $acpersona = Persona.find(params[:id])
+   # @personas = Persona.all	
     @perfil = Perfil.new
     @ocupacions = Ocupacion.all
 
@@ -58,7 +63,6 @@ class PersonasController < ApplicationController
  #     end 		
  #   end
 
-
   end
 
   def create
@@ -73,5 +77,42 @@ class PersonasController < ApplicationController
 	render 'new'
     end
   end
+
+  # PUT /personas/1
+  # PUT /personas/1.json
+  def update
+    @persona = Persona.find(params[:id])
+
+    respond_to do |format|
+      if @persona.update_attributes(params[:persona])
+        format.html { redirect_to @persona, notice: 'Persona was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @persona.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def destroy
+    @persona = Persona.find(params[:id])
+    @persona.destroy
+
+    respond_to do |format|
+      format.html { redirect_to personas_url }
+      format.json { head :no_content }
+    end
+  end
+
+private
   
+	def usuario_coordinador
+	   deny_destroy unless current_persona.perfil.ocupacion_id==1 
+	end
+
+        def deny_destroy
+    	   store_location
+    	   redirect_to (personas_path), :notice => "Necesitas permisos de coordinador para dar de baja una persona y para assignar un perfil."
+  	end
+
 end

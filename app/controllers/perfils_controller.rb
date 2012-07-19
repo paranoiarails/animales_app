@@ -1,4 +1,7 @@
 class PerfilsController < ApplicationController
+before_filter :authenticate
+before_filter :usuario_coordinador, :only => [:destroy, :edit, :new]
+
   # GET /perfils
   # GET /perfils.json
   def index
@@ -26,7 +29,7 @@ class PerfilsController < ApplicationController
   def new
     @perfil = Perfil.new
     @ocupacions = Ocupacion.all
-    @persona = Persona.find(params[:id])
+  #  @persona = Persona.find(params[:id])
 
     respond_to do |format|
       format.html # new.html.erb
@@ -46,11 +49,9 @@ class PerfilsController < ApplicationController
   # POST /perfils.json
   def create
     @perfil = Perfil.new(params[:perfil])
-
-
+ #   @persona = $acpersona
 
     respond_to do |format|
-
 
       if @perfil.save
         format.html { redirect_to @perfil, notice: 'Perfil was successfully created.' }
@@ -59,6 +60,10 @@ class PerfilsController < ApplicationController
 #    @persona = Persona.find(params[:idd])
 #@persona.perfil_id = @perfil.id
 #@persona.update
+	$acpersona.perfil = @perfil
+ 	#@persona.save
+	#$acpersona.update_attributes(params[:acpersona])
+	$acpersona.update_column(:perfil_id, @perfil)
       else
         format.html { render action: "new" }
         format.json { render json: @perfil.errors, status: :unprocessable_entity }
@@ -97,4 +102,17 @@ class PerfilsController < ApplicationController
     end
 
   end
+
+private
+  
+	def usuario_coordinador
+	   deny_destroy unless current_persona.perfil.ocupacion_id==1 
+	end
+
+        def deny_destroy
+    	   store_location
+    	   redirect_to (ocupacions_path), :notice => "Necesitas permisos de coordinador para crear/editar/destruir un perfil."
+  	end
+
 end
+

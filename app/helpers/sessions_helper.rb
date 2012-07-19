@@ -23,7 +23,27 @@ module SessionsHelper
 	!current_persona.nil?
   end
 
+  def authenticate
+     deny_access unless signed_in?
+  end
 
+  def deny_access
+    store_location
+    redirect_to signin_path, :notice => "Por favor dese de alta desde la sesion de otro usuario registrado o pinche en el link contactenos para ponerse en contacto con nosotros."
+  end
+
+#  def deny_access
+#    store_location
+#    redirect_to signin_path, :notice => "Please sign in to access this page."
+#  end
+
+
+
+  private
+
+ 	def store_location
+	   session[:return_to] = request.fullpath
+	end
 
 
 end

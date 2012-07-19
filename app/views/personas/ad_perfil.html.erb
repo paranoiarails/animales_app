@@ -19,19 +19,23 @@
     </div>
   <% end %>
 
-  <div>
+  <!--div>
   <select name="perfil[persona_id]"> 
-   <% @personas.each do |persona| %>
+   < @personas.each do |persona| %>
    
-     <% if persona.perfil_id.nil? %> 
-       <option value="<%= persona.id %>" 
-         <%= 'selected' if persona.id == @perfil.persona_id %>> 
-         <%= persona.nombre %> 
+     < if persona.perfil_id.nil? %> 
+       <option value="<= persona.id %>" 
+         <= 'selected' if persona.id == @perfil.persona_id %>> 
+         <= persona.nombre %> 
        </option> 
-     <% end %>
+     < end %>
 
-   <% end %> 
-  </select></div> 
+   < end %> 
+  </select></div--> 
+
+<!h1>
+<%= $acpersona.nombre %>
+<!/h1>
 
   <div>
     <p>

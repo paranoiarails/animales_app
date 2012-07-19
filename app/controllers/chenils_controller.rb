@@ -1,5 +1,10 @@
 class ChenilsController < ApplicationController
-  # GET /chenils
+ 
+before_filter :authenticate
+#, :except => [:index, :show]
+before_filter :usuario_coordinador, :only => [:destroy, :new]
+
+ # GET /chenils
   # GET /chenils.json
   def index
     @chenils = Chenil.all
@@ -89,4 +94,17 @@ class ChenilsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+
+private
+
+	def usuario_coordinador
+	   deny_destroy unless (current_persona.perfil.ocupacion_id==1 || current_persona.perfil.ocupacion_id==3)
+	end
+
+        def deny_destroy
+    	   store_location
+    	   redirect_to (animals_path), :notice => "Necesitas permisos de coordinador/veterinario para dar de alta/baja un chenil."
+  	end
+
 end

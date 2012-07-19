@@ -1,13 +1,13 @@
 Pruebaanimales3::Application.routes.draw do
-  resources :dinas
+  resources :searches
 
-  resources :dinos
-
-  resources :probas_probos
-
-  resources :probos
+  get "searches/new"
 
   resources :probas
+
+  resources :pers
+
+  resources :tareas
 
   resources :perfils_zonas
 
@@ -30,6 +30,8 @@ Pruebaanimales3::Application.routes.draw do
   resources :sessions, :only => [:new, :create, :destroy]
 
 get "personas/new"
+
+  match 'ad_per', :to => 'probas#ad_per#id'
 
 #match '/animales', :to=> 'animals'
 

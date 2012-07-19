@@ -1,4 +1,8 @@
 class RelacionAnimalsController < ApplicationController
+before_filter :authenticate
+before_filter :usuario_c_v_v, :only => [:destroy, :edit, :new]
+
+
   # GET /relacion_animals
   # GET /relacion_animals.json
   def index
@@ -85,4 +89,17 @@ class RelacionAnimalsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+private
+	def usuario_c_v_v
+	   deny_destroy unless (current_persona.perfil.ocupacion_id==1 || current_persona.perfil.ocupacion_id==3 || current_persona.perfil.ocupacion_id==2)
+	end
+
+        def deny_destroy
+    	   store_location
+    	   redirect_to (relacion_animals_path), :notice => "Necesitas permisos de coordinador/veterinario/voluntario para dar de baja/alta/editar una relacion entre animales."
+  	end
+
 end
+
+

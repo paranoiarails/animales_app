@@ -1,8 +1,12 @@
 <h1>Listing zonas</h1>
 
-<tr>
-<td><%= link_to 'Zona Coordinador', :action=> "coord" %></td>
-</tr>
+<!--<tr>
+<td><= link_to 'Zona Coordinador', :action=> "coord" %></td>
+</tr>-->
+
+<% if current_persona.perfil.ocupacion_id == 1 %>
+    <%= link_to 'Crear zona nueva', new_zona_path %>
+<% end %>
 
 <table>
   <tr>
@@ -22,6 +26,10 @@
     <td><%= zona.text %></td>
     <td><%= link_to 'cheniles', :action=> "cheniles", :id=> zona.id %></td>
     <td><%= link_to 'Show', zona %></td>
+<% if current_persona.perfil.ocupacion_id == 1 %>      
+       <td><%= link_to 'Edit', edit_zona_path(zona) %></td>
+       <td><%= link_to 'Destroy', zona, confirm: 'Are you sure?', method: :delete %>
+<% end %>
   </tr>
   <%end%>
 <% end %>
@@ -34,6 +42,11 @@
     <td><%= zona.text %></td>
     <td><%= link_to 'cheniles', :action=> "cheniles", :id=> zona.id %></td>
     <td><%= link_to 'Show', zona %></td>
+<% if current_persona.perfil.ocupacion_id == 1 %>      
+       <td><%= link_to 'Edit', edit_zona_path(zona) %></td>
+       <td><%= link_to 'Destroy', zona, confirm: 'Are you sure?', method: :delete %>
+<% end %>
+
   </tr>
   <%end%>
 <% end %>

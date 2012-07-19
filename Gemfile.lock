@@ -94,6 +94,7 @@ GEM
     mime-types (1.18)
     multi_json (1.2.0)
     netrc (0.7.1)
+    nifty-generators (0.4.6)
     nokogiri (1.5.2)
     pg (0.13.2)
     polyglot (0.3.3)
@@ -187,6 +188,7 @@ DEPENDENCIES
   gravatar_image_tag (= 0.1.0)
   heroku
   jquery-rails
+  nifty-generators (>= 0.4.0)
   paperclip!
   pg
   rails (= 3.2.2)

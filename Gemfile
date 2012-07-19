@@ -13,6 +13,8 @@ gem 'annotate', :git => 'git://github.com/ctran/annotate_models.git'
 
 gem 'test-unit'
 
+gem 'nifty-generators', '>= 0.4.0'
+
 #gem "heroku"
 #gem 'sqlite3-ruby', '1.2.5', :group => :development
 # for deployment on Heroku
@@ -52,4 +54,6 @@ group :assets do
 end
 
 gem 'jquery-rails'
+
+
 

@@ -2,11 +2,10 @@
 #
 # Table name: perfils
 #
-#  id           :integer         not null, primary key
+#  id           :integer         primary key
 #  ocupacion_id :integer
-#  created_at   :datetime        not null
-#  updated_at   :datetime        not null
-#  persona_id   :integer
+#  created_at   :datetime
+#  updated_at   :datetime
 #
 
 require 'spec_helper'

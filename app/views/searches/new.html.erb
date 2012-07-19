@@ -1,0 +1,16 @@
+
+<h1>Buscar por:</h1>
+
+<%= form_for @search do |f| %>
+  <p>
+    <%= f.label :nombre %><br />
+    <%= f.text_field :nombre %>
+  </p>
+  <p>
+    <%= f.label :zona_id %><br />
+    <%= f.collection_select :zona_id, Zona.all, :id, :nombre, :include_blank => true %>
+  </p>
+  <p><%= f.submit %></p>
+<% end %>
+
+

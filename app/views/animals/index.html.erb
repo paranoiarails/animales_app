@@ -1,6 +1,26 @@
 <h1>Listing animals</h1>
 
-  <td><%= @auxx %></td>
+  <!--td>< @auxx ></td-->
+
+<%= form_for @search do |f| %>
+  <p>
+    <%= f.label :nombre %>
+  
+    <%= f.label :zona_id %><br />
+
+    <%= f.text_field :nombre %>
+
+    <%= f.collection_select :zona_id, Zona.all, :id, :nombre, :include_blank => true %>
+  </p>
+  <p><%= f.submit %></p>
+<% end %>
+
+<!-- form_tag animals_patch, :method => 'get' do |f| %>
+  <p>
+	<%= text_field_tag :search, params[:search]%>
+	<%= submit_tag "Search"%>
+  </p>  
+< end -->
 
 <table>
   <tr>
@@ -31,9 +51,11 @@
   <td><%= chenil.zona.nombre %></td>
   <th>Ocupado</th>
   <td><%= chenil.ocupado %></td>
+<% if (current_persona.nil? == 0) %>
   <td><%= link_to 'Show', chenil %></td>
   <td><%= link_to 'Edit', edit_chenil_path(chenil) %></td>
  </tr>
+<% end %>
  <% @animals.each do |animal| %>
   <% if chenil.id == animal.chenil_id %> 
     <% @cont=@cont+1 %>  
@@ -45,12 +67,19 @@
     <td><%= animal.sexo %></td>
     <td><%= animal.fecha_entrada %></td>
     <td><%= animal.observaciones %></td>
+    <td><%= animal.chenil.zona_id %></td>
+    <td><%= link_to 'Show', animal %></td>
+<!-- if ((current_persona.nil? == 1) && (current_persona.perfil.ocupacion_id == Coordinador || current_persona.perfil.ocupacio_id == Veterinario || current_persona.perfil.ocupacio_id == 3)) %--> 
+
+<% if ! current_persona.nil? && (current_persona.perfil.ocupacion_id == 1 || current_persona.perfil.ocupacion_id == 2 || current_persona.perfil.ocupacion_id == 3 ) %> 
+   
   <td><%= link_to 'relaciones', :action=> "relacionesXanimal", :id=> animal.id %></td>
   <td><%= link_to 'mover animal', :action=> "mover", :id=> animal.id %></td>
 <!--  <td><= link_to 'relacion', :action=> "relaciones", :id=> animal.id ></td> -->
-    <td><%= link_to 'Show', animal %></td>
+
     <td><%= link_to 'Edit', edit_animal_path(animal) %></td>
     <td><%= link_to 'Destroy', animal, confirm: 'Are you sure?', method: :delete %></td>
+<% end %>
   </tr>
   <% end %>
  <% end %>
@@ -70,4 +99,6 @@
 
 <br />
 
-<%= link_to 'New Animal', new_animal_path %>
+<% if ! current_persona.nil? && current_persona.perfil.ocupacion_id == 1 %>    
+	<%= link_to 'New Animal', new_animal_path %>
+<% end %>

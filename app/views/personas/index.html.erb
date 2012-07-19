@@ -1,4 +1,9 @@
 <h1>Listado personas</h1>
+
+<% if current_persona.perfil.ocupacion_id == 1 %>
+    <%= link_to 'Nueva persona', new_persona_path %>
+<% end %>
+
 <table>
 <tr>
 <th>Foto</th>
@@ -15,16 +20,17 @@
 <td><%= gravatar_for persona, :size => 30 %></td>
 <td><%= persona.nombre %></td>
 <td><%= persona.email %></td>
-<td><%= persona.perfil_id%></td>
+<td><%= persona.perfil.ocupacion.nombre%></td>
 <td><%= link_to 'Show', persona %></td>
-<td><%= link_to 'Edit', edit_persona_path(persona) %></td>
-<td><%= link_to 'Añadir Perfil', :action=> "ad_perfil", :id=>persona.id %></td>
+  <% if current_persona.perfil.ocupacion_id == 1 %>   
+	<td><%= link_to 'Edit', edit_persona_path(persona) %></td>
+	<td><%= link_to 'Añadir Perfil', :action=> "ad_perfil", :id=>persona.id %></td>
 
-<td><%= link_to 'Destroy', persona, :confirm => 'Are you sure?',
-:method => :delete %></td>
+	<td><%= link_to 'Destroy', persona, :confirm => 'Are you sure?',
+	:method => :delete %></td>
 </tr>
+  <% end %>
 <% end %>
 </table>
 <br />
-<%= link_to 'Nueva persona', new_persona_path %>
 

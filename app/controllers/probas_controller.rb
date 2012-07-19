@@ -10,6 +10,12 @@ class ProbasController < ApplicationController
     end
   end
 
+  def ad_per
+    $acproba = Proba.find(params[:id])
+    @per = Per.new	
+
+  end
+
   # GET /probas/1
   # GET /probas/1.json
   def show
