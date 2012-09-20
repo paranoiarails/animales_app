@@ -32,7 +32,11 @@
     <td><%= relacion_animal.id %></td>
     <td><%= relacion_animal.animal1_id %></td>
     <td><%= relacion_animal.animal.nombre %></td>
-    <td><%= image_tag relacion_animal.animal.foto.url(:thumb) %>
+    <% if relacion_animal.animal.images.empty? %>
+      <td><%= image_tag 'logo.png'%></td>
+    <% else %>
+      <td><%= image_tag relacion_animal.animal.images.first.image.url(:thumb) %>
+    <%end%>
 
 
 
@@ -40,7 +44,12 @@
     <td><= image_tag @animal2.foto.url(:thumb) > -->
     <td><%= relacion_animal.animal2_id %></td>
     <td><%= relacion_animal.animal2.nombre %></td>
-    <td><%= image_tag relacion_animal.animal2.foto.url(:thumb) %>
+   <% if relacion_animal.animal2.images.empty? %>
+    <td><%= image_tag 'logo.png'%></td>
+   <% else %>
+    <td><%= image_tag relacion_animal.animal2.images.first.image.url(:thumb) %>
+   <%end%>
+    <td><!--= image_tag relacion_animal.animal2.foto.url(:thumb) -->
     <td><%= relacion_animal.relacion %></td>
     <td><%= link_to 'Show', relacion_animal %></td>
 <% if (current_persona.perfil.ocupacion_id == 1 || current_persona.perfil.ocupacion_id == 2 || current_persona.perfil.ocupacion_id == 3) %>

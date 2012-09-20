@@ -10,14 +10,31 @@
   <%= @animal.raza %>
 </p>
 
+
+
+<p>
+  <b>Foto:</b>
+
+<% if @animal.images.count > 0 %>
+
+  <% for image in @animal.images %>
+
+		<%= link_to image_tag(image.image.url(:thumb)), image.image.url(:original) %>	
+ 
+ <% end %>
+
+<% end %>
+
 <p>
   <b>Sexo:</b>
   <%= @animal.sexo %>
 </p>
 
 <p>
-  <b>Foto:</b>
-  <%= image_tag @animal.foto.url(:small) %>
+  <b>Zona:</b>
+  <% if !(@animal.zona_id.nil?) %> 	
+    <%= @animal.zona.nombre %>
+  <%end%>
 </p>
 
 <p>

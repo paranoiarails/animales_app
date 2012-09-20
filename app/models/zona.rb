@@ -14,6 +14,8 @@ class Zona < ActiveRecord::Base
 
 	has_many :chenils
 
+	has_many :animales
+
 	has_and_belongs_to_many :perfils
         
 end

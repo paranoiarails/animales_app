@@ -1,0 +1,197 @@
+
+ <% @chenils.each do |chenil| %>
+  <% if (chenil.id == @animal.chenil_id ) %>
+      <table>
+	 <tr>
+ 	 <th>Chenil</th>
+  	 <td><%= chenil.numero %></td>
+  	 <th>Zona</th>
+  	 <td><%= chenil.zona.nombre %></td>
+      </table>
+ 	 </tr>
+  <% end %>
+ <% end %>
+ 
+
+
+
+<table>
+  <tr>
+    <th>Zona</th>
+    <th>Chenil</th>
+    <th>Foto</th>
+    <th>Nombre</th>
+    <th>Id</th>
+    <th></th>
+    <th></th>    
+  </tr>
+
+  <tr>
+    <td><%= @animal.chenil.zona.nombre %></td>
+    <td><%= @animal.chenil.numero %></td>
+
+
+    <% if @animal.images.empty? %>
+      <td><%= image_tag 'logo.png'%></td>
+    <% else %>
+      <td><%= image_tag @animal.images.first.image.url(:thumb) %>
+    <%end%>
+
+    <td><%= @animal.nombre %></td>
+    <td><%= @animal.id %></td>
+
+
+  </tr>
+</table>
+
+
+<table>
+  <tr>
+    <th>Foto</th>
+    <th>Nombre</th>
+    <th>Relacion</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+
+
+  <% @animals.each do |animal| %>
+   <% if ((animal.chenil_id == @animal.chenil_id) && (animal.id != @animal.id)) %> 
+
+	  <tr>
+
+	    <% if animal.images.empty? %>
+		<td><%= image_tag 'logo.png' %></td>       
+	    <% else %>
+		<td><%= image_tag animal.images.first.image.url(:thumb) %>
+	    <% end %>
+	    <td><%= animal.nombre %></td>
+	    <% @cont=0 %>
+     	    <% @relacion_animals.each do |relacion| %>
+		<% if ((relacion.animal1_id == @animal.id && relacion.animal2_id == animal.id) || (relacion.animal2_id == @animal.id && relacion.animal1_id == animal.id )) %>
+		     <td><%= relacion.relacion %></td>
+		     <% @cont=1 %>
+		<% end %>	
+
+	    <%end%>	
+		
+	    <% if @cont!=1 %>
+		  <td><%= '0' %></td>	
+	    <%end%>
+	
+   <%end%> 
+  <%end%>
+</table>
+
+
+
+<table>
+
+dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+
+  <tr>
+    <th>Foto</th>
+    <th>Nombre</th>
+    <th>Relacion</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+-----------------------------------------------------------------------------------
+
+
+ <% @chenils.each do |chenil| %>
+  <% if chenil.zona_id == @animal.chenil.zona_id && chenil.id != @animal.chenil_id %>
+<fieldset id="moveanimal">
+<form>
+
+
+--------------------------g--------------------------------------
+yyyyyyyyyyyyyyyyyyyyyyy
+
+  <% @animals.each do |animal| %>
+    <% if (animal.chenil_id == chenil.id) %> 
+pppppppppppppppppppppppp
+
+	  <tr>
+
+	    <% if animal.images.empty? %>
+		<td><%= image_tag 'logo.png' %></td>       
+	    <% else %>
+		<td><%= image_tag animal.images.first.image.url(:thumb) %>
+	    <% end %>
+	    <td><%= animal.nombre %></td>
+	    <% @cont=0 %>
+
+     	    <% @relacion_animals.each do |relacion| %>
+		<% if ((relacion.animal1_id == @animal.id && relacion.animal2_id == animal.id) || (relacion.animal2_id == @animal.id && relacion.animal1_id == animal.id )) %>
+		     <td><%= relacion.relacion %></td>
+		     <% @cont=1 %>
+		     
+		     <% if (relacion.relacion==2)%>
+			  <% @contfin=2 %>
+		     <% end %>	
+
+<%= "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb" %>
+	
+	        <%end%>
+ggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg
+	    <%end%>	
+
+<%= "__________________________________________________________________________" %>
+
+	    <% if (@cont!=1) %>
+		<td><%= "0" %></td>
+		<% if (@contfin!=2) %>
+			<% @contfin=0 %>	
+	        <%end%>
+	    <%end%>
+<%= "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@   " %>
+	
+    <%end%> 
+  <%end%>
+
+55555555555555555555 O_O
+
+   <tr>
+     <th>Chenil</th>
+     <td><%= chenil.numero %></td>
+     <th>Zona</th>
+     <td><%= chenil.zona.nombre %></td>
+     <th>Rel Chenil</th>
+     <td><%= @contfin %></td>
+     <td><%= link_to 'mover Animal', :action=> "moverfin", :id1=> @animal.id, :id2 => chenil.id %></td>
+
+     
+................................................................................
+  </tr>
+
+</form>
+</fieldset>
+ <%end%>
+
+
+
+----------------------------------------------------------------
+
+
+<%end%>
+<%= "##############################################################################" %>
+</table>
+
+<%= "hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh" %>
+
+
+
+
+
+
+
+
+
+
+
+

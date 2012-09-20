@@ -21,6 +21,17 @@ background: #fff;
 section h1 {
 font-size: 200%;
 }
+
+/* animales/mover______cuadricula_datos */
+#moveanimal {
+background:transparent url(../images/bgfieldset.jpg) no-repeat scroll left bottom;
+border:medium none;
+color:#333333;
+height:665px;
+padding:0 0 0 50px;
+width:515px;
+}
+
 /* Links */
 a {
 color: #09c;

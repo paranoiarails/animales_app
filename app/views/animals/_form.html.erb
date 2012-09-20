@@ -1,4 +1,4 @@
-<%= form_for(@animal) do |f| %>
+<%= form_for @animal, :html => { :multipart =>true } do |f| %>
   <% if @animal.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@animal.errors.count, "error") %> prohibited this animal from being saved:</h2>
@@ -29,27 +29,49 @@
    <% @chenils.each do |chenil| %> 
        <option value="<%= chenil.id %>" 
          <%= 'selected' if chenil.id == @animal.chenil_id %>> 
-         <%= chenil.id %>
+         <%= chenil.zona.nombre %> 
          <%= chenil.numero %>
-         <%= chenil.zona_id %> 
-         
        </option> 
    <% end %> 
   </select></div>
 
-  <div class="field">
-	<%= f.label :Foto %><br />
-  	<%= f.file_field :foto %>
-  </div> 
 
   <div class="field">
     <%= f.label :fecha_entrada %><br />
     <%= f.date_select :fecha_entrada %>
   </div>
+
+ 
+
+<%= f.fields_for :images do  |image_fields| %>
+   <% if image_fields.object.new_record? %>
+	<p>
+   		<%= image_fields.file_field :image %>
+	</p>
+   <% end %>	
+<% end %>
+
+  <%= f.fields_for :images do |image_fields| %>
+
+     <% unless image_fields.object.new_record? %>
+
+	<p>
+		<%= link_to image_tag(image_fields.object.image.url(:thumb)), image_fields.object.image.url(:original) %>
+		<%= image_fields.check_box :_destroy %>
+	</p>
+
+     <% end %>
+  <% end %>
+
+
   <div class="field">
     <%= f.label :observaciones %><br />
     <%= f.text_area :observaciones %>
   </div>
+
+
+
+
   <div class="actions">
     <%= f.submit %>
   </div>

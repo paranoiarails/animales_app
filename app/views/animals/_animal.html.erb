@@ -14,7 +14,12 @@
 
 
   <tr>
-    <td><%= image_tag animal.foto.url(:thumb) %>
+   <% if animal.images.empty? %>
+    <td><%= image_tag 'logo.png'%></td>
+   <% else %>
+
+    <td><%= image_tag animal.images.first.image.url(:thumb) %>
+   <%end%>
     <td><%= animal.nombre %></td>
     <td><%= animal.chenil_id %></td>
     <td><%= animal.raza %></td>
@@ -26,8 +31,8 @@
 
 <% if ! current_persona.nil? && (current_persona.perfil.ocupacion_id == 1 || current_persona.perfil.ocupacion_id == 2 || current_persona.perfil.ocupacion_id == 3 ) %> 
    
-  <td><%= link_to 'relaciones', :action=> "relacionesXanimal", :id=> animal.id %></td>
-  <td><%= link_to 'mover animal', :action=> "mover", :id=> animal.id %></td>
+  <td><%= link_to 'relaciones', animal, :action=> "relacionesXanimal", :id=> animal.id %></td>
+  <td><%= link_to 'mover animal', animal, method: :mover %></td>
 <!--  <td><= link_to 'relacion', :action=> "relaciones", :id=> animal.id ></td> -->
 
     <td><%= link_to 'Edit', edit_animal_path(animal) %></td>

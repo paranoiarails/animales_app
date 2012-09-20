@@ -1,24 +1,49 @@
 <h1>Nuevo animal</h1>
 
+<fieldset id="moveanimal">
+<!--form-->
 <%= form_for(@animal, :html => {:multipart=>true}) do |f| %>
 
   <div class="field">
 	<%= f.label :nombre %><br />
 	<%= f.text_field :nombre %>
   </div>
+
+  <div>
+  <select name="animal[especie_id]"> 
+   <% @especies.each do |especie| %> 
+       <option value="<%= especie.id %>" 
+         <%= 'selected' if especie.id == @animal.especie_id %>>
+         <%= especie.nombre %> 
+       </option> 
+   <% end %> 
+  </select></div>
+
   <div class="field">
 	<%= f.label :raza %><br />
 	<%= f.text_field :raza %>
         <% @aux=:raza %>
   </div>
+
+  <div class="field">
+	<%= f.label :edad %><br />
+	<%= f.text_field :edad %>
+  </div>
+
   <div class="field">
 	<%= f.label :sexo %><br />
 	<%= f.text_field :sexo %>
   </div>
+
+
+
   <div class="field">
 	<%= f.label :Fecha_entrada %><br />
 	<%= f.date_select :fecha_entrada %>
   </div>
+ 
+
+ <% @chenils=Chenil.where("chenils.zona_id = ?", @zona.id) %> 
 
   <div>
   <select name="animal[chenil_id]"> 
@@ -28,11 +53,15 @@
          <%= chenil.id %> 
          <%= chenil.numero %> 
          <%= chenil.zona.nombre %>
-
        </option> 
+
+       <% @animal.zona_id=chenil.zona_id %>	
+
    <% end %> 
 
   </select></div>
+
+
 
  <td><%= @aux%></td>
  <!-- 
@@ -47,10 +76,19 @@
   	<%= f.text_field :observaciones %>
   </div> 
 
-  <div class="field">
-	<%= f.label :Foto %><br />
-  	<%= f.file_field :foto %>
-  </div> 
+<%= f.fields_for :images do  |image_fields| %>
+   <% if image_fields.object.new_record? %>
+	<p>
+   		<%= image_fields.file_field :image %>
+	</p>
+   <% end %>	
+<% end %>
+
+
+<!--  <div class="field">
+	<= f.label :Foto ><br />
+  	<= f.file_field :foto >
+  </div--> 
 
   <div class="actions">
     <%= f.submit %>
@@ -59,7 +97,8 @@
   
 
 <% end %>
-
+<!--/form-->
+</fieldset>
 
 
 <%= link_to 'Back', animals_path %>

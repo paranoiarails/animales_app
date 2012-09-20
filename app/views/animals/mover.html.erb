@@ -1,33 +1,98 @@
 
+ <% @chenils.each do |chenil| %>
+  <% if (chenil.id == @animal.chenil_id ) %>
+      <table>
+	 <tr>
+ 	 <th>Chenil</th>
+  	 <td><%= chenil.numero %></td>
+  	 <th>Zona</th>
+  	 <td><%= chenil.zona.nombre %></td>
+      </table>
+ 	 </tr>
+  <% end %>
+ <% end %>
+ 
+
+
+
 <table>
   <tr>
-    <th>Id</th>
-    <th>Nombre</th>
-    <th>Foto</th>
     <th>Zona</th>
     <th>Chenil</th>
+    <th>Foto</th>
+    <th>Nombre</th>
+    <th>Id</th>
     <th></th>
     <th></th>    
   </tr>
 
   <tr>
-    <td><%= @animal.id %></td>
-    <td><%= @animal.nombre %></td>
-    <td><%= image_tag @animal.foto.url(:thumb) %>
-
     <td><%= @animal.chenil.zona.nombre %></td>
     <td><%= @animal.chenil.numero %></td>
- <!--   <td><= @zona.nombre ></td> -->
+
+
+    <% if @animal.images.empty? %>
+      <td><%= image_tag 'logo.png'%></td>
+    <% else %>
+      <td><%= image_tag @animal.images.first.image.url(:thumb) %>
+    <%end%>
+
+    <td><%= @animal.nombre %></td>
+    <td><%= @animal.id %></td>
+
+
   </tr>
 </table>
 
 
 <table>
   <tr>
-    <th>Id relacion</th>
-    <th>Id_Animal</th>
-    <th>Nombre</th>
     <th>Foto</th>
+    <th>Nombre</th>
+    <th>Relacion</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+
+
+  <% @animals.each do |animal| %>
+   <% if ((animal.chenil_id == @animal.chenil_id) && (animal.id != @animal.id)) %> 
+
+	  <tr>
+
+	    <% if animal.images.empty? %>
+		<td><%= image_tag 'logo.png' %></td>       
+	    <% else %>
+		<td><%= image_tag animal.images.first.image.url(:thumb) %>
+	    <% end %>
+	    <td><%= animal.nombre %></td>
+	    <% @cont=0 %>
+     	    <% @relacion_animals.each do |relacion| %>
+		<% if ((relacion.animal1_id == @animal.id && relacion.animal2_id == animal.id) || (relacion.animal2_id == @animal.id && relacion.animal1_id == animal.id )) %>
+		     <td><%= relacion.relacion %></td>
+		     <% @cont=1 %>
+		<% end %>	
+
+	    <%end%>	
+		
+	    <% if @cont!=1 %>
+		  <td><%= '0' %></td>	
+	    <%end%>
+	
+   <%end%> 
+  <%end%>
+</table>
+
+
+
+<table>
+
+
+  <tr>
+    <th>Foto</th>
+    <th>Nombre</th>
     <th>Relacion</th>
     <th></th>
     <th></th>
@@ -36,59 +101,73 @@
 
 
  <% @chenils.each do |chenil| %>
-  <% if chenil.zona_id == @animal.chenil.zona_id %>
+  <% if chenil.zona_id == @animal.chenil.zona_id && chenil.id != @animal.chenil_id %>
+<fieldset id="moveanimal">
+<form>
 
- <tr>
-  <th>Chenil</th>
-  <td><%= chenil.numero %></td>
-  <th>Zona</th>
-  <td><%= chenil.zona.nombre %></td>
- </tr>
 
-   <% @cont=0 %>
 
-<% @relacion_animals.each do |relacion_animal| %>
-  <% if ((@animal.id == relacion_animal.animal1_id) && (relacion_animal.animal2.chenil_id == chenil.id)) %> 
-  <%@cont=@cont+1%>
-  <tr>
-    <td><%= relacion_animal.id %></td>
-    <td><%= relacion_animal.animal2_id %></td>
-    <td><%= relacion_animal.animal2.nombre %></td>
-    <td><%= image_tag relacion_animal.animal2.foto.url(:thumb) %>
-    <td><%= relacion_animal.relacion %></td>
-    <td><%= link_to 'Show', relacion_animal %></td>
-    <td><%= link_to 'Edit', edit_relacion_animal_path(relacion_animal) %></td>
-    <td><%= link_to 'Destroy', relacion_animal, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
- 
-   
- <%end%>
+  <% @animals.each do |animal| %>
+    <% if (animal.chenil_id == chenil.id) %> 
 
-  <% if ( @animal.id == relacion_animal.animal2_id && relacion_animal.animal.chenil_id == chenil.id)  %> 
-  <%@cont=@cont+1%>
-  <tr>
-    <td><%= relacion_animal.id %></td>
-    <td><%= relacion_animal.animal1_id %></td>
-    <td><%= relacion_animal.animal.nombre %></td>
-    <td><%= image_tag relacion_animal.animal.foto.url(:thumb) %>
-    <td><%= relacion_animal.relacion %></td>
-    <td><%= link_to 'Show', relacion_animal %></td>
-    <td><%= link_to 'Edit', edit_relacion_animal_path(relacion_animal) %></td>
-    <td><%= link_to 'Destroy', relacion_animal, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
-  </tr>  
 
+	  <tr>
+
+	    <% if animal.images.empty? %>
+		<td><%= image_tag 'logo.png' %></td>       
+	    <% else %>
+		<td><%= image_tag animal.images.first.image.url(:thumb) %>
+	    <% end %>
+	    <td><%= animal.nombre %></td>
+	    <% @cont=0 %>
+
+     	    <% @relacion_animals.each do |relacion| %>
+		<% if ((relacion.animal1_id == @animal.id && relacion.animal2_id == animal.id) || (relacion.animal2_id == @animal.id && relacion.animal1_id == animal.id )) %>
+		     <td><%= relacion.relacion %></td>
+		     <% @cont=1 %>
+		     
+		     <% if (relacion.relacion==2)%>
+			  <% @contfin=2 %>
+		     <% end %>	
+	        <%end%>
+	    <%end%>	
+
+	    <% if (@cont!=1) %>
+		<td><%= "0" %></td>
+		<% if (@contfin!=2) %>
+			<% @contfin=0 %>	
+	        <%end%>
+	    <%end%>
+	
+    <%end%> 
   <%end%>
 
 
+   <tr>
+     <th>Chenil</th>
+     <td><%= chenil.numero %></td>
+     <th>Zona</th>
+     <td><%= chenil.zona.nombre %></td>
+     <th>Rel Chenil</th>
+     <td><%= @contfin %></td>
+     <td><%= link_to 'mover Animal', :action=> "moverfin", :id1=> @animal.id, :id2 => chenil.id %></td>
 
- <%end%>
-   <td><%= @cont%></td>
+  </tr>
 
-  <%end%>
+</form>
+</fieldset>
  <%end%>
+
+<%end%>
 
 </table>
+
+
+
+
+
+
+
 
 
 

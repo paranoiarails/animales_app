@@ -15,12 +15,21 @@
   <p><%= f.submit %></p>
 <% end %>
 
+
+<% if ! current_persona.nil? && current_persona.perfil.ocupacion_id == 1 %>    
+	<p><%= link_to 'Añadir nuevo animal', :action=> "zona" %></p>
+	<hr />
+<% end %>
+
 <!-- form_tag animals_patch, :method => 'get' do |f| %>
   <p>
 	<%= text_field_tag :search, params[:search]%>
 	<%= submit_tag "Search"%>
   </p>  
 < end -->
+
+<fieldset id="moveanimal">
+<form>
 
 <table>
   <tr>
@@ -37,6 +46,7 @@
   </tr>
 
 <% @zonas.each do |zona| %>
+
  <tr>
   <td>Zona</td>
   <td><%= zona.nombre %></td>
@@ -60,8 +70,13 @@
   <% if chenil.id == animal.chenil_id %> 
     <% @cont=@cont+1 %>  
   <tr>
-    <td><%= image_tag animal.foto.url(:thumb) %>
-    <td><%= animal.nombre %></td>
+   <% if animal.images.empty? %>
+    <td><%= link_to image_tag('logo.png'), animal %></td>
+   <% else %>
+
+    <td><%= link_to image_tag(animal.images.first.image.url(:thumb)), animal %></td>
+   <%end%>
+    <td><%= link_to animal.nombre, animal %></td>
     <td><%= animal.chenil_id %></td>
     <td><%= animal.raza %></td>
     <td><%= animal.sexo %></td>
@@ -72,7 +87,7 @@
 <!-- if ((current_persona.nil? == 1) && (current_persona.perfil.ocupacion_id == Coordinador || current_persona.perfil.ocupacio_id == Veterinario || current_persona.perfil.ocupacio_id == 3)) %--> 
 
 <% if ! current_persona.nil? && (current_persona.perfil.ocupacion_id == 1 || current_persona.perfil.ocupacion_id == 2 || current_persona.perfil.ocupacion_id == 3 ) %> 
-   
+  <td><%= link_to 'añadir foto', :action=> "add_foto", :id=> animal.id %></td> 
   <td><%= link_to 'relaciones', :action=> "relacionesXanimal", :id=> animal.id %></td>
   <td><%= link_to 'mover animal', :action=> "mover", :id=> animal.id %></td>
 <!--  <td><= link_to 'relacion', :action=> "relaciones", :id=> animal.id ></td> -->
@@ -94,8 +109,11 @@
 <% end %>
 
 <%end%>
+
 <%end%>
 </table>
+</form>
+</fieldset>
 
 <br />
 

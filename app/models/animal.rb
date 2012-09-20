@@ -19,8 +19,13 @@
 
 class Animal < ActiveRecord::Base
 
+     attr_accessible :nombre, :raza, :sexo, :fecha_entrada, :observaciones, :chenil_id, :images_attributes, :especie_id, :zona_id, :edad
 
   belongs_to :chenil, :foreign_key=>'chenil_id'  
+
+  belongs_to :especie, :foreign_key=>'especie_id'
+
+  belongs_to :zona, :foreign_key=>'zona_id'
 
 #relacion muchos_a_muchos consigo misma 
 
@@ -30,6 +35,18 @@ class Animal < ActiveRecord::Base
 
    has_many :animals, :through => :relacion_animals, :source => :animal2_id
 
+#paperclip, asignacion de imagenes
+
+
+   has_many :images  #, :dependent => :destroy
+
+accepts_nested_attributes_for :images, :allow_destroy => true
+
+#validates :especie_id, :presence => true
+
+######railscast, allow_destroy => true
+#, :reject_if => lambda { |t| t['animal_image'].nil? }
+
   #m-m consigo misma sin campos extras
   #has_and_belongs_to_many :relacion_animals, :class_name => "Animal",
    # :foreign_key => "animal1_id",
@@ -37,17 +54,19 @@ class Animal < ActiveRecord::Base
 
 
 # Paperclip
-  has_attached_file :foto,
-		:styles => {
-                      :thumb => "60x60>",
-                      :small => "150x150>"
-                 }
+#  has_attached_file :foto,
+#		:styles => {
+#                      :thumb => "60x60>",
+#                      :small => "150x150>"
+#                 }
+
 
 
 
 def animals
   @animales ||= find_animals
 end
+
 
 private
 

@@ -18,7 +18,7 @@ before_filter :usuario_c_v_v, :only => [:destroy, :new, :edit, :mover]
     @chenils = Chenil.all
     @zonas = Zona.all
     @search = Search.new	
-    @cont
+   # @cont
 
     respond_to do |format|
       format.html # index.html.erb
@@ -26,16 +26,31 @@ before_filter :usuario_c_v_v, :only => [:destroy, :new, :edit, :mover]
     end
   end
 
+  def add_foto
+    @animal = Animal.find(params[:id])
+    @photo = @animal.animal_images.build	
+  end
+
   def mover
     @animal = Animal.find(params[:id])
 
     @aux
-    @animals = Animal.all
+
+  #  @animals = Animal.all
+  #  if params[:chenil_id.zona_id]
+  #    @animals = @animals.where(:chenil.zona_id =>(params[:chenil.zona_id] == @animal.chenil.zona_id))
+  #  end
     @chenil = @animal.chenil_id
-    @chenils = Chenil.all
+  #optimizacion tamaño busqueda/ tabla chenils
+  #   @chenils = Chenil.all
+    @chenils = Chenil.find(:all, :conditions => ["zona_id == ?", @animal.chenil.zona_id])
+  #  @animals = Animal.find(:all, :conditions => ["chenil_id in ?", @chenils])
+    @animals = Animal.where("chenil_id in (?)", @chenils)
     @zona = @animal.chenil.zona_id
   #  @zona = Zona.find(params[:animal.chenil_id.zona_id])
-    @relacion_animals = RelacionAnimal.all
+  #  Optimizacion
+#    @relacion_animals = RelacionAnimal.all
+    @relacion_animals = RelacionAnimal.find(:all, :conditions => ["animal1_id == ? OR animal2_id == ?", @animal.id, @animal.id])	
 
     respond_to do |format|
       format.html # index.html.erb
@@ -78,11 +93,28 @@ before_filter :usuario_c_v_v, :only => [:destroy, :new, :edit, :mover]
     end
   end
 
+  def zona
+    @animal = Animal.new
+    @zonas = Zona.all
+    $zona
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @animal }
+    end
+  end
+
   # GET /animals/new
   # GET /animals/new.json
   def new
     @animal = Animal.new
+    @zona = Zona.find(params[:id])
+#    @animal = Animal.zona(params[:id])
+
+    @zonas = Zona.all
     @chenils = Chenil.all
+    @especies = Especie.all
+    3.times { @animal.images.build }
     @aux = @animal.id
 
     respond_to do |format|
@@ -95,6 +127,13 @@ before_filter :usuario_c_v_v, :only => [:destroy, :new, :edit, :mover]
   def edit
     @animal = Animal.find(params[:id])
     @chenils = Chenil.all
+    3.times { @animal.images.build }
+    
+  end
+
+  def moverfin
+    @animal = Animal.find(params[:id1])
+    @chenil = Chenil.find(params[:id2])
     
   end
 
@@ -108,8 +147,10 @@ before_filter :usuario_c_v_v, :only => [:destroy, :new, :edit, :mover]
         format.html { redirect_to @animal, notice: 'Animal was successfully created.' }
         format.json { render json: @animal, status: :created, location: @animal }
         @auxx=@animal.chenil_id
+        @animal.zona_id=@animal.chenil.zona_id
+	@animal.save
       else
-        format.html { render action: "new" }
+        format.html { render action: "new", notice: 'No se puedo crear animal nuevo.' }
         format.json { render json: @animal.errors, status: :unprocessable_entity }
       end
     end

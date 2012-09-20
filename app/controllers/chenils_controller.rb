@@ -9,6 +9,7 @@ before_filter :usuario_coordinador, :only => [:destroy, :new]
   def index
     @chenils = Chenil.all
     @zonas = Zona.all	
+    @animals = Animal.all
 
     respond_to do |format|
       format.html # index.html.erb

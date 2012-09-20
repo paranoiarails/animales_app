@@ -1,0 +1,12 @@
+<h1>Especie</h1>
+
+<p>
+  <strong>Nombre:</strong>
+  <%= @especie.nombre %>
+</p>
+
+<p>
+  <%= link_to "Edit", edit_especy_path(@especie) %> |
+  <%= link_to "Destroy", @especie, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", especies_path %>
+</p>

@@ -1,4 +1,6 @@
 Pruebaanimales3::Application.routes.draw do
+  resources :especies
+
   resources :searches
 
   get "searches/new"
@@ -21,6 +23,8 @@ Pruebaanimales3::Application.routes.draw do
 
   resources :zonas
 
+  resources :especies
+
   ######## mal   get "zonas/coord"
 
   get "sessions/new"
@@ -31,9 +35,15 @@ Pruebaanimales3::Application.routes.draw do
 
 get "personas/new"
 
+
+
   match 'ad_per', :to => 'probas#ad_per#id'
 
-#match '/animales', :to=> 'animals'
+  match 'add_foto', :to =>'animals#add_foto#id'
+
+#match '/animales', :to=> 'animals' 
+
+match 'zona', :to => 'animals#zona'
 
 #match 'creardino', :to => 'dinas#creardino#id'
 
@@ -41,6 +51,7 @@ match 'creardina', :to => 'dinos#creardina#id'
 match '/dinas/new', :to => 'dinas#new#id'
 
 match 'ad_perfil', :to => 'personas#ad_perfil#id'
+
 match 'new_perf', :to => 'personas#new_perf#id'
 
 match 'cheniles', :to => 'zonas#cheniles#id'
@@ -48,6 +59,9 @@ match 'coordz', :to => 'zonas#coord'
 match 'coordchen', :to => 'chenils#coordchen'
 
 match 'relaciones/:id', :to => 'animals#relaciones'
+
+match 'moverfin/:id/:id', :to => 'animals#moverfin#id1#id2' 
+
 match 'relacionesXanimal/:id', :to => 'animals#relacionesXanimal'
 match 'mover/:id', :to => 'animals#mover'
 
@@ -55,6 +69,9 @@ match '/signup', :to => 'personas#new'
 match '/signin', :to => 'sessions#new'
 match '/signout', :to => 'sessions#destroy'
 
+#animales new, para guardar zona.id
+  match 'animals/new/:id', :to => 'animals#new#id' 
+####################################################
 
 
 

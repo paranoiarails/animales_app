@@ -6,7 +6,8 @@ class SearchesController < ApplicationController
   def create
     @search = Search.new(params[:search])
     if @search.save
-      redirect_to @search, :notice => "Successfully created search."
+      render :action => 'show'
+      #redirect_to @search, :notice => "Successfully created search."
     else
       render :action => 'new'
     end

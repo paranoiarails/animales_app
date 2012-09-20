@@ -1,24 +1,41 @@
 
 <tr>
 <td><%= link_to 'nueva relacion', :action=> "relaciones", :id=> @animal.id %></td>
+<th></th>
+	<hr />
 </tr>
 
+<table>
   <tr>
-    <td><th><%= @animal.id %></th></td>
-    <td><%= @animal.nombre %></td>
-    <td><%= @zona %></td>
- <!--   <td><= @zona.nombre ></td> -->
+    <th>Id animal</th>
+    <th>Foto Animal</th>
+    <th>Nombre Animal</th>
+    <th>Zona</th>
+    <th></th>
+    <th></th>
+    <th></th>
   </tr>
+  <tr>
+    <td><%= @animal.id %></td>
+    <% if @animal.images.empty? %>
+       <td><%= image_tag 'logo.png'%></td>
+    <% else %>
+       <td><%= image_tag @animal.images.first.image.url(:thumb) %>
+    <%end%>
+    <td><%= @animal.nombre %></td>
+    <td><%= @animal.chenil.zona.nombre %></td>
+
+  </tr>
+</table>
 
 
 <table>
   <tr>
-    <th>Zona animal1</th>
+    <th>Zona animal</th>
     <th>Id relacion</th>
-    <th>Animal1</th>
-    <th>Nombre Animal1</th>
-    <th>Foto Animal1</th>
-    <th>Animal2</th>
+    <th>Animal</th>
+    <th>Nombre Animal</th>
+    <th>Foto Animal</th>
     <th>Relacion</th>
     <th></th>
     <th></th>
@@ -28,24 +45,44 @@
 
 
  <% @relacion_animals.each do |relacion_animal| %>
-  <% if (@animal.id == relacion_animal.animal1_id || @animal.id == relacion_animal.animal2_id) %> 
+  <% if ( @animal.id == relacion_animal.animal2_id) %> 
  
 
+	  <tr>
+	    <td><%= relacion_animal.animal.chenil.zona.nombre %>
+	    <td><%= relacion_animal.id %></td>
+	    <td><%= relacion_animal.animal1_id %></td>
+	    <td><%= relacion_animal.animal.nombre %></td>
+	   <% if relacion_animal.animal.images.empty? %>
+	    <td><%= image_tag 'logo.png'%></td>
+	   <% else %>
+	    <td><%= image_tag relacion_animal.animal.images.first.image.url(:thumb) %>
+	   <%end%>
 
+	    <td><%= relacion_animal.relacion %></td>
+	    <td><%= link_to 'Show', relacion_animal %></td>
+	    <td><%= link_to 'Edit', edit_relacion_animal_path(relacion_animal) %></td>
+	    <td><%= link_to 'Destroy', relacion_animal, confirm: 'Are you sure?', method: :delete %></td>
+	  </tr>
+  <%end%>
 
+  <% if @animal.id == relacion_animal.animal1_id %>
+	  <tr>
+	    <td><%= relacion_animal.animal2.chenil.zona.nombre %>
+	    <td><%= relacion_animal.id %></td>
+	    <td><%= relacion_animal.animal2_id %></td>
+	    <td><%= relacion_animal.animal2.nombre %></td>
+	   <% if relacion_animal.animal2.images.empty? %>
+	    <td><%= image_tag 'logo.png'%></td>
+	   <% else %>
+	    <td><%= image_tag relacion_animal.animal2.images.first.image.url(:thumb) %>
+	   <%end%>
 
-  <tr>
-    <td><%= relacion_animal.animal.chenil.zona.nombre %>
-    <td><%= relacion_animal.id %></td>
-    <td><%= relacion_animal.animal1_id %></td>
-    <td><%= relacion_animal.animal.nombre %></td>
-    <td><%= image_tag relacion_animal.animal.foto.url(:thumb) %>
-    <td><%= relacion_animal.animal2_id %></td>
-    <td><%= relacion_animal.relacion %></td>
-    <td><%= link_to 'Show', relacion_animal %></td>
-    <td><%= link_to 'Edit', edit_relacion_animal_path(relacion_animal) %></td>
-    <td><%= link_to 'Destroy', relacion_animal, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
+	    <td><%= relacion_animal.relacion %></td>
+	    <td><%= link_to 'Show', relacion_animal %></td>
+	    <td><%= link_to 'Edit', edit_relacion_animal_path(relacion_animal) %></td>
+	    <td><%= link_to 'Destroy', relacion_animal, confirm: 'Are you sure?', method: :delete %></td>
+	  </tr>
 
   <%end%>
  <%end%>

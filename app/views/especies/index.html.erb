@@ -1,0 +1,17 @@
+<h1>Especies</h1>
+
+<table>
+  <tr>
+    <th>Nombre</th>
+  </tr>
+  <% for especie in @especies %>
+    <tr>
+      <td><%= especie.nombre %></td>
+      <td><%= link_to "Show", especie %></td>
+      <td><%= link_to "Edit", edit_especy_path(especie) %></td>
+      <td><%= link_to "Destroy", especie, :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+
+<p><%= link_to "New Especie", new_especy_path %></p>

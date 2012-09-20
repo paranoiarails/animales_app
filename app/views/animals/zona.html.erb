@@ -1,0 +1,17 @@
+
+<h1>Zona animal nuevo?</h1>
+
+  <div>
+  <select name=$zona_id> 
+   <% @zonas.each do |zona| %> 
+       <option value="<%= zona.id %>" 
+         <%= 'selected' if zona.id == $zona_id %>>
+         <%= zona.nombre %>
+       </option> 
+   <% end %> 
+  </select></div>
+
+
+<p><%= link_to 'Continuar', :action=> "new", :id=> $zona.id%></p>
+
+<!-- new_animal_path($zona) -->
