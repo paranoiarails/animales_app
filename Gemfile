@@ -23,17 +23,19 @@ gem "heroku"
 group :development, :test do
   gem 'rspec-rails'
   gem "rails-erd"
-gem 'sqlite3', '1.3.5', :require => 'sqlite3'
+  gem 'sqlite3'
+#, '1.3.5', :require => 'sqlite3'
+end
 
-#group :test do
-gem 'rspec'
-gem 'webrat', '0.7.1'
-gem 'factory_girl_rails', '1.0'
+group :test do
+    gem 'rspec'
+    gem 'webrat', '0.7.1'
+    gem 'factory_girl_rails', '1.0'
  
     gem 'ZenTest', "4.6.0"
     gem 'autotest'
     gem 'autotest-rails'
-  end
+end
 
 group :production do
   gem 'pg'
