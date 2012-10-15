@@ -43,14 +43,14 @@ before_filter :usuario_c_v_v, :only => [:destroy, :new, :edit, :mover]
     @chenil = @animal.chenil_id
   #optimizacion tamaño busqueda/ tabla chenils
   #   @chenils = Chenil.all
-    @chenils = Chenil.find(:all, :conditions => ["zona_id == ?", @animal.chenil.zona_id])
+    @chenils = Chenil.find(:all, :conditions => ["zona_id = ?", @animal.chenil.zona_id])
   #  @animals = Animal.find(:all, :conditions => ["chenil_id in ?", @chenils])
     @animals = Animal.where("chenil_id in (?)", @chenils)
     @zona = @animal.chenil.zona_id
   #  @zona = Zona.find(params[:animal.chenil_id.zona_id])
   #  Optimizacion
 #    @relacion_animals = RelacionAnimal.all
-    @relacion_animals = RelacionAnimal.find(:all, :conditions => ["animal1_id == ? OR animal2_id == ?", @animal.id, @animal.id])	
+    @relacion_animals = RelacionAnimal.find(:all, :conditions => ["animal1_id = ? OR animal2_id = ?", @animal.id, @animal.id])	
 
     respond_to do |format|
       format.html # index.html.erb

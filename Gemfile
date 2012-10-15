@@ -42,6 +42,9 @@ group :production do
   gem 'thin'
 end
 
+#calendar
+gem "watu_table_builder", :require => "table_builder"
+
 
 #http://stackoverflow.com/questions/7300532/blueprint-css-rails-3-1-help
 # Gems used only for assets and not required

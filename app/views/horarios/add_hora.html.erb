@@ -1,0 +1,60 @@
+<h1>Fecha guardada correctamente</h1>
+
+	<!--td>< link_to 'Edit', edit_persona_path(persona) ></td>
+	<td>< link_to 'Añadir Perfil', :action=> "ad_perfil", :id=>persona.id ></td-->
+
+	<% @horario.fecha = @fecha %> 
+Date.today 
+	<% @horario.zona_id = 1 %>
+        <% @horario.persona_id = @persona %>
+        <% @horario.tarde = @tarde %>
+
+        <% @horario.save %>
+
+        <%= link_to 'Horarios', :action=> "index" %>
+
+        <% @horarios=Horario.all %>
+<br />
+
+<div id="calendar">
+ <h2 id="month">
+  <%= link_to "<", :month => (@date.beginning_of_month-1).strftime("%Y-%m-01") %>
+  <%= h @date.strftime("%B %Y") %>
+  <%= link_to ">", :month => (@date.end_of_month+1).strftime("%Y-%m-01") %>
+ </h2>
+ <%= calendar_for @horarios, :year => @date.year, :month => @date.month, :first_day_of_week =>1 do |t| %>
+  <%= t.head('lunes', 'martes', 'miercoles', 'jueves', 'viernes', 'sabado', 'domingo') %>
+  <% t.day(:day_method => :fecha) do |date, horarios| %>
+    <%= date.day %>
+    <br />
+    <%= ('------------------')%>
+    <br />
+    <%= link_to 'Mañana', :action => "add_hora", :fecha=> date, :tarde=> 0 %>
+    <!-- check_box_tag "persona[horario_ids][]", horario.id, @persona.horarios.include?(horario) -->
+    <ul>
+     <% horarios.each do |hora| %>
+        <% if hora.tarde==0 %>
+           <%= link_to h(hora.zona_id), hora %>
+	   <ul>	
+	<% end %>
+     <%end%>
+
+    <br />
+    <%= link_to 'Tarde', :action => "add_hora", :fecha=> date, :tarde=> 1 %>
+    <ul> 
+     <% horarios.each do |hora| %>
+        <% if hora.tarde==1 %>
+           <%= link_to h(hora.zona_id), hora %>
+	   <ul>
+	<% end %>
+     <%end%>
+  <% end %>
+<% end %>
+</div>
+
+<br />
+
+<%= link_to 'New Horario', new_horario_path %>
+
+
+

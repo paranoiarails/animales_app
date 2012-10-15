@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120905170517) do
+ActiveRecord::Schema.define(:version => 20121010153238) do
 
   create_table "animal_images", :force => true do |t|
     t.string   "caption"
@@ -60,6 +60,23 @@ ActiveRecord::Schema.define(:version => 20120905170517) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "horarios", :force => true do |t|
+    t.integer  "persona_id"
+    t.integer  "zona_id"
+    t.date     "fecha"
+    t.integer  "tarde"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "horarios_personas", :id => false, :force => true do |t|
+    t.integer "horario_id"
+    t.integer "persona_id"
+  end
+
+  add_index "horarios_personas", ["horario_id", "persona_id"], :name => "index_horarios_personas_on_horario_id_and_persona_id"
+  add_index "horarios_personas", ["persona_id", "horario_id"], :name => "index_horarios_personas_on_persona_id_and_horario_id"
 
   create_table "images", :force => true do |t|
     t.string   "image_file_name"

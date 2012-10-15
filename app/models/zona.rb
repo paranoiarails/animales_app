@@ -16,6 +16,8 @@ class Zona < ActiveRecord::Base
 
 	has_many :animales
 
+        has_many :horarios
+
 	has_and_belongs_to_many :perfils
         
 end

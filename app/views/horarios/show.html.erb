@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>User:</b>
+  <%= @horario.persona_id %>
+</p>
+
+<p>
+  <b>Zona:</b>
+  <%= @horario.zona_id %>
+</p>
+
+<p>
+  <b>Fecha:</b>
+  <%= @horario.fecha %>
+</p>
+
+<p>
+  <b>Tarde:</b>
+  <%= @horario.tarde %>
+</p>
+
+
+<%= link_to 'Edit', edit_horario_path(@horario) %> |
+<%= link_to 'Back', horarios_path %>

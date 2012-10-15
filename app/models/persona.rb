@@ -26,6 +26,8 @@ attr_accessible :nombre, :email, :password, :password_confirmation, :perfil_id
 
 #before_save :encrypt_password
 
+        has_many :horarios
+
 	belongs_to :perfil, :foreign_key=>'perfil_id'
  
 
