@@ -1,29 +1,6 @@
-<h1>Listing horarios</h1>
+<h1>Horarios</h1>
 
-<table>
-  <tr>
 
-    <th>Usuario</th>
-    <th>Zona</th>
-    <th>Fecha</th>
-    <th>Tarde</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @horarios.each do |horario| %>
-  <tr>
-    <td><%= horario.persona.nombre %></td>
-    <td><%= horario.zona_id %></td>
-    <td><%= horario.fecha %></td>
-    <td><%= horario.tarde %></td>
-    <td><%= link_to 'Show', horario %></td>
-    <td><%= link_to 'Edit', edit_horario_path(horario) %></td>
-    <td><%= link_to 'Destroy', horario, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
-<% end %>
-</table>
 
 <br />
 
@@ -40,24 +17,38 @@
     <br />
     <%= ('------------------')%>
     <br />
-    <%= link_to 'Mañana', :action => "add_hora", :fecha=> date, :tarde=> 0 %>
-    <!-- check_box_tag "persona[horario_ids][]", horario.id, @persona.horarios.include?(horario) -->
+    <%= link_to 'Mañana', {:action => "add_hora", :fecha=> date, :tarde=> 0}, :class => "enlaceb" %>
+
     <ul>
      <% horarios.each do |hora| %>
         <% if hora.tarde==0 %>
-           <%= link_to h(hora.persona.nombre), hora %>
-	   <ul>	
+	   <% if hora.persona.id == current_persona.id %>	
+              <%= link_to h(hora.persona.nombre), hora %>
+	      <ul>
+           <% else %>
+	      <%= hora.persona.nombre %>
+	      <ul>	
+           <% end %>	
 	<% end %>
      <%end%>
 
     <br />
-    <%= link_to 'Tarde', :action => "add_hora", :fecha=> date, :tarde=> 1 %>
-    <!-- check_box_tag "horario[user_id]", current_persona.id -->
+ <!--cal class>
+  <ul-->
+    <%= link_to 'Tarde', {:action=> "add_hora", :fecha=> date, :tarde=> 1}, :class => "enlaceb" %>
+  <!--/ul>
+ </cal-->
+ 
     <ul> 
      <% horarios.each do |hora| %>
         <% if hora.tarde==1 %>
-           <%= link_to h(hora.persona.nombre), hora %>
-	   <ul>
+	   <% if hora.persona.id == current_persona.id %>
+               <%= link_to h(hora.persona.nombre), hora %>
+	       <ul>
+	   <% else %>
+	      <%= hora.persona.nombre %>
+	      <ul>
+           <% end %>
 	<% end %>
      <%end%>
 

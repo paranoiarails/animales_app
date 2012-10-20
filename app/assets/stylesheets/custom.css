@@ -33,7 +33,7 @@ width:515px;
 }
 
 /* Links */
-a {
+a:link {
 color: #09c;
 text-decoration: none;
 }
@@ -44,6 +44,9 @@ text-decoration: underline;
 a:visited {
 color: #069;
 }
+a.enlaceb:link{color:#ff0000;text-decoration:none}
+a.enlaceb:hover{color:#ff0000;text-decoration:underline}
+a.enlaceb:visited{color:#ff0000}
 
 /* Navigation */
 nav {
@@ -66,6 +69,7 @@ padding: 0.2em 0;
 nav ul li a {
 padding: 0 5px;
 font-weight: bold;
+color: #0ffff;
 }
 nav ul li a:visited {
 color: #09c;
@@ -97,7 +101,6 @@ padding: 20px;
 border-radius:
 10px;
 }
-
 /*calendario*/
 body {
   background-color: #FFF;
@@ -107,10 +110,6 @@ body {
 
 a img {
   border: none;
-}
-
-a {
-  color: #0000FF;
 }
 
 body {
@@ -278,4 +277,5 @@ body {
   font-size: 11px;
   text-align: center;
 }
+
 

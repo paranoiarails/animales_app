@@ -20,6 +20,11 @@
   <%= @horario.tarde %>
 </p>
 
+<% if current_persona.id == @horario.persona_id %>
+	<%= link_to 'Destroy', @horario, confirm: 'Desea borrar este turno?', method: :delete %>
+<%end%>
+<br>
+<br>
 
 <%= link_to 'Edit', edit_horario_path(@horario) %> |
 <%= link_to 'Back', horarios_path %>

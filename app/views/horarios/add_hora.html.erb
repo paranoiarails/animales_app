@@ -1,15 +1,28 @@
 <h1>Fecha guardada correctamente</h1>
 
-	<!--td>< link_to 'Edit', edit_persona_path(persona) ></td>
-	<td>< link_to 'Añadir Perfil', :action=> "ad_perfil", :id=>persona.id ></td-->
+
 
 	<% @horario.fecha = @fecha %> 
-Date.today 
-	<% @horario.zona_id = 1 %>
-        <% @horario.persona_id = @persona %>
-        <% @horario.tarde = @tarde %>
 
-        <% @horario.save %>
+	<% @horario.zona_id = 1 %>
+        <% @horario.persona_id = @persona.id %>
+        <% @horario.tarde = @tarde %>
+        
+
+
+	<% @igual=0 %>
+        <% @guardados.each do |guard| %>
+		<% if @horario.persona.id == guard.persona.id && @horario.tarde == guard.tarde %>
+			<% @igual=1 %>
+		<% end %>
+	<% end %>
+
+	<% if @igual == 1 %>
+		<%= "Ya tienes elegido este turno!!!" %>
+	<% else %>
+        	<% @horario.save %>
+		<%= "Turno guardado correctamente" %>
+	<% end %>
 
         <%= link_to 'Horarios', :action=> "index" %>
 

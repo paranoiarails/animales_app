@@ -20,7 +20,11 @@
 <td><%= gravatar_for persona, :size => 30 %></td>
 <td><%= persona.nombre %></td>
 <td><%= persona.email %></td>
-<td><%= persona.perfil.ocupacion.nombre%></td>
+<% if !persona.perfil.nil? %>
+  <td><%= persona.perfil.ocupacion.nombre%></td>
+<% else %>
+  <td><%= "No perfil" %></td>
+<%end%>
 <td><%= link_to 'Show', persona %></td>
   <% if current_persona.perfil.ocupacion_id == 1 %>   
 	<td><%= link_to 'Edit', edit_persona_path(persona) %></td>

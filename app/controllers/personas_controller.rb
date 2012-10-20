@@ -69,8 +69,11 @@ before_filter :usuario_coordinador, :only => [:destroy, :edit, :ad_perfil]
     @persona = Persona.new(params[:persona])
     if @persona.save
 	redirect_to @persona
-	sign_in @persona
-	flash[:success] = "Welcome to the Sample App!"
+
+#No entraria como persona nueva
+#######################################################
+#	sign_in @persona
+#	flash[:success] = "Welcome to the Sample App!"
 
     else
 	@title = "Sign up"
