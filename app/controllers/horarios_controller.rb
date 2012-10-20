@@ -20,7 +20,7 @@ class HorariosController < ApplicationController
     @fecha = Date.parse(params[:fecha])
     @date = params[:month] ? Date.parse(params[:month]) : Date.today
     @tarde = params[:tarde]
-    @guardados = Horario.find(:all, :conditions => ["fecha == ?", @fecha])
+    @guardados = Horario.find(:all, :conditions => ["fecha = ?", @fecha])
   end
 
   # GET /horarios/1
