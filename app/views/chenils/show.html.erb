@@ -1,5 +1,14 @@
 <p id="notice"><%= notice %></p>
 
+
+<% if current_persona.perfil.ocupacion_id == 1 %>   
+	<p>
+	<td><%= link_to 'Edit', edit_chenil_path(@chenil) %></td>
+	<td><%= "  /   " %></td>				
+	<td><%= link_to 'Destroy', @chenil, confirm: 'Are you sure?', method: :delete %></td>
+	</p>
+	<% end %>
+
 <p>
   <b>Zona:</b>
   <%= @chenil.zona_id %>
@@ -8,14 +17,12 @@
 <p>
   <b>Ocupado:</b>
   <%= @chenil.ocupado %>
-</p>
 
-<p>
+  <%= "/" %>
   <b>Capacidad:</b>
   <%= @chenil.capacidad %>
-</p>
+  <%= "/" %>
 
-<p>
   <b>Caplibre:</b>
   <%= @chenil.caplibre %>
 </p>
@@ -30,8 +37,5 @@
   <%= @chenil.estado %>
 </p>
 
-si modo coordinador Links a zona coordinador
-si no Links a zona personal
 <p></p>
-<%= link_to 'Edit', edit_chenil_path(@chenil) %> |
 <%= link_to 'Back', chenils_path %>

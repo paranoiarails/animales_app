@@ -1,32 +1,37 @@
 
+<% if ! current_persona.nil? && (current_persona.perfil.ocupacion_id == 1 || current_persona.perfil.ocupacion_id == 3 ) %> 
+	<%= link_to 'cambiar de zona', :action=> "zona_mover", :id=>@animal.id%>
+<%end%>
+
+<table class="tabla">
  <% @chenils.each do |chenil| %>
   <% if (chenil.id == @animal.chenil_id ) %>
-      <table>
-	 <tr>
+	<tr class="modo3">
  	 <th>Chenil</th>
   	 <td><%= chenil.numero %></td>
   	 <th>Zona</th>
   	 <td><%= chenil.zona.nombre %></td>
-      </table>
- 	 </tr>
+ 	 <th></th>
+ 	</tr>
   <% end %>
  <% end %>
+
  
 
 
 
-<table>
+
   <tr>
     <th>Zona</th>
     <th>Chenil</th>
     <th>Foto</th>
     <th>Nombre</th>
     <th>Id</th>
-    <th></th>
-    <th></th>    
+
+
   </tr>
 
-  <tr>
+  <tr class="modo1">
     <td><%= @animal.chenil.zona.nombre %></td>
     <td><%= @animal.chenil.numero %></td>
 
@@ -39,28 +44,23 @@
 
     <td><%= @animal.nombre %></td>
     <td><%= @animal.id %></td>
-
-
   </tr>
-</table>
 
 
-<table>
-  <tr>
+  <!--tr>
     <th>Foto</th>
     <th>Nombre</th>
     <th>Relacion</th>
     <th></th>
     <th></th>
-    <th></th>
-  </tr>
+  </tr-->
 
 
 
   <% @animals.each do |animal| %>
    <% if ((animal.chenil_id == @animal.chenil_id) && (animal.id != @animal.id)) %> 
 
-	  <tr>
+	  <tr class="modo1">
 
 	    <% if animal.images.empty? %>
 		<td><%= image_tag 'logo.png' %></td>       
@@ -80,14 +80,12 @@
 	    <% if @cont!=1 %>
 		  <td><%= '0' %></td>	
 	    <%end%>
+	    <td></td>
+	    <td></td>	
+	</tr>
 	
    <%end%> 
   <%end%>
-</table>
-
-
-
-<table>
 
 
   <tr>
@@ -101,9 +99,9 @@
 
 
  <% @chenils.each do |chenil| %>
-  <% if chenil.zona_id == @animal.chenil.zona_id && chenil.id != @animal.chenil_id %>
-<fieldset id="moveanimal">
-<form>
+  <% if chenil.zona_id == @zona.id && chenil.id != @animal.chenil_id %>
+<!--fieldset id="moveanimal">
+<form-->
 
 
 
@@ -111,12 +109,11 @@
     <% if (animal.chenil_id == chenil.id) %> 
 
 
-	  <tr>
-
+	  <tr class="modo1">
 	    <% if animal.images.empty? %>
 		<td><%= image_tag 'logo.png' %></td>       
 	    <% else %>
-		<td><%= image_tag animal.images.first.image.url(:thumb) %>
+		<td><%= image_tag animal.images.first.image.url(:thumb) %></td>
 	    <% end %>
 	    <td><%= animal.nombre %></td>
 	    <% @cont=0 %>
@@ -138,12 +135,16 @@
 			<% @contfin=0 %>	
 	        <%end%>
 	    <%end%>
+	    <td></td>
+	    <td></td>
+	</tr>		
+
 	
     <%end%> 
   <%end%>
 
 
-   <tr>
+  <tr class="modo3">
      <th>Chenil</th>
      <td><%= chenil.numero %></td>
      <th>Zona</th>
@@ -154,8 +155,9 @@
 
   </tr>
 
-</form>
-</fieldset>
+<!--/form>
+</fieldset-->
+
  <%end%>
 
 <%end%>

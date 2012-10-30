@@ -46,6 +46,7 @@ get "personas/new"
 #match '/animales', :to=> 'animals' 
 
 match 'zona', :to => 'animals#zona'
+match 'zona_mover', :to => 'animals#zona_mover#id'
 
 #match 'creardino', :to => 'dinas#creardino#id'
 
@@ -64,10 +65,13 @@ match 'coordchen', :to => 'chenils#coordchen'
 
 match 'relaciones/:id', :to => 'animals#relaciones'
 
-match 'moverfin/:id/:id', :to => 'animals#moverfin#id1#id2' 
+match 'moverfin', :to => 'animals#moverfin#id1#id2'
+#match 'moverfin/:id/:id', :to => 'animals#moverfin#id1#id2' 
 
 match 'relacionesXanimal/:id', :to => 'animals#relacionesXanimal'
-match 'mover/:id', :to => 'animals#mover'
+match 'mover', :to => 'animals#mover#id1#id2'
+
+match 'new/:id', :to => 'animals#newz#id'
 
 match '/signup', :to => 'personas#new'
 match '/signin', :to => 'sessions#new'

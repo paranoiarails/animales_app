@@ -278,4 +278,44 @@ body {
   text-align: center;
 }
 
+/* color tablas */
+.table .modo2 {
+font-size: 12px;
+font-weight:bold;
+background-color: #660099;
+background-image: url(fondo_tr02.png);
+background-repeat: repeat-x;
+color: #660099;
+font-family: “Trebuchet MS”, Arial;
+text-align:left;
+}
+.table .modo2 td {
+padding: 5px;
+border-right-width: 1px;
+border-bottom-width: 1px;
+border-right-style: solid;
+border-bottom-style: solid;
+border-right-color: #EBE9BC;
+border-bottom-color: #EBE9BC;
+}
+.table .modo2 th {
+background-image: url(fondo_tr02a.png);
+background-position: left top;
+font-size: 12px;
+font-weight:bold;
+background-color: #660099;
+background-repeat: repeat-x;
+color: #660099;
+font-family: “Trebuchet MS”, Arial;
+text-align:left;
+border-right-width: 1px;
+border-bottom-width: 1px;
+border-right-style: solid;
+border-bottom-style: solid;
+border-right-color: #EBE9BC;
+border-bottom-color: #EBE9BC;
+}
+
+
+
 

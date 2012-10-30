@@ -5,7 +5,7 @@
 	<%= link_to 'Crear chenil nuevo', new_chenil_path %>
 <% end %>  
 
-<table>
+<table class="tabla">
   <tr>
     <th>Zona</th>
     <th>Numero</th>
@@ -15,17 +15,24 @@
     <th>Notas</th>
     <th>Estado</th>
     <th></th>
-    <th></th>
-    <th></th>
+
   </tr>
 
 <% @zonas.each do |zona| %>
   <% if zona.id >2 %>
+     <tr class="modo2">
+        <th>Zona</th>
+	<td><%= zona.nombre %></td> 
+	<td></td>
+	<td></td>
+	<td></td>     
+     </tr>
      <% @chenils.each do |chenil| %>
          <% if zona.id == chenil.zona_id %> 
-		  <tr>
+		  <tr class="modo3">
 		    <td><%= zona.nombre %></td>
-		    <td><%= chenil.numero %></td>
+		    <!--td>< chenil.numero ></td-->
+		    <td><%= link_to chenil.numero, chenil %></td>
 		    <td><%= chenil.ocupado %></td>
 		    <td><%= chenil.capacidad %></td>
 		    <td><%= chenil.caplibre %></td>
@@ -36,10 +43,10 @@
 		    <%end%>
 		    <td><%= chenil.estado %></td>
 		    <td><%= link_to 'Show', chenil %></td>
-			<% if current_persona.perfil.ocupacion_id == 1 %>   
-				<td><%= link_to 'Edit', edit_chenil_path(chenil) %></td>
-		    		<td><%= link_to 'Destroy', chenil, confirm: 'Are you sure?', method: :delete %></td>
-			<% end %>
+			<!-- if current_persona.perfil.ocupacion_id == 1 >   
+				<td>< link_to 'Edit', edit_chenil_path(chenil) ></td>
+		    		<td>< link_to 'Destroy', chenil, confirm: 'Are you sure?', method: :delete ></td>
+			< end -->
 		  </tr>
 		  <% @animals.each do |animal| %>
 		     <% if animal.chenil_id == chenil.id %>	
@@ -77,10 +84,10 @@
 		    <%end%>
 		    <td><%= chenil.estado %></td>
 		    <td><%= link_to 'Show', chenil %></td>
-			<% if current_persona.perfil.ocupacion_id == 1 %>   
-				<td><%= link_to 'Edit', edit_chenil_path(chenil) %></td>
-		    		<td><%= link_to 'Destroy', chenil, confirm: 'Are you sure?', method: :delete %></td>
-			<% end %>
+			<!-- if current_persona.perfil.ocupacion_id == 1 %>   
+				<td><link_to 'Edit', edit_chenil_path(chenil) %></td>
+		    		<td>< link_to 'Destroy', chenil, confirm: 'Are you sure?', method: :delete %></td>
+			< end %-->
 		  </tr>
 		  <% @animals.each do |animal| %>
 		     <% if animal.chenil_id == chenil.id %>	

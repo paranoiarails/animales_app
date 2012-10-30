@@ -20,6 +20,8 @@ class ZonasController < ApplicationController
   def cheniles
     @zona = Zona.find(params[:id])
     @chenils = Chenil.all
+#pendiente optimizacion solo animales con zona_id=zona.id
+    @animals = Animal.all
   end	
 
   # GET /zonas/1

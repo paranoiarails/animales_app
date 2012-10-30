@@ -21,10 +21,10 @@
 <% @zonas.each do |zona| %>
   <% if zona.id >2 %>
   <tr>
-    <td><%= zona.nombre %></td>
+    <td><%= link_to zona.nombre, :action=> "cheniles", :id=> zona.id %></td>
+    <!--td><!-- zona.nombre ></td-->
     <td><%= zona.notas %></td>
     <td><%= zona.text %></td>
-    <td><%= link_to 'cheniles', :action=> "cheniles", :id=> zona.id %></td>
     <td><%= link_to 'Show', zona %></td>
 <% if current_persona.perfil.ocupacion_id == 1 %>      
        <td><%= link_to 'Edit', edit_zona_path(zona) %></td>
@@ -37,10 +37,9 @@
 <% @zonas.each do |zona| %>
   <% if zona.id<=2 %>
   <tr>
-    <td><%= zona.nombre %></td>
+    <td><%= link_to zona.nombre, :action=> "cheniles", :id=> zona.id %></td>
     <td><%= zona.notas %></td>
     <td><%= zona.text %></td>
-    <td><%= link_to 'cheniles', :action=> "cheniles", :id=> zona.id %></td>
     <td><%= link_to 'Show', zona %></td>
 <% if current_persona.perfil.ocupacion_id == 1 %>      
        <td><%= link_to 'Edit', edit_zona_path(zona) %></td>

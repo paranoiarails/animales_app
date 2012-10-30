@@ -5,14 +5,14 @@
 <% end %>
 
 
-<table>
+<table class="tabla">
   <tr>
     <th>Zona animal1</th>
     <th>Id relacion</th>
     <th>Animal1</th>
     <th>Nombre Animal1</th>
     <th>Foto Animal1</th>
-    <th>Animal2</th>
+    <th>Zona animal2</th>
     <th>Nombre Animal2</th>
     <th>Foto Animal2</th>
     <th>Relacion</th>
@@ -25,9 +25,9 @@
 
 <% @zonas.each do |zona| %>
 <% @relacion_animals.each do |relacion_animal| %>
-    <% if zona.id == relacion_animal.animal.chenil.zona_id %> 
+    <% if zona.id == relacion_animal.animal.zona_id %> 
 
-  <tr>
+  <tr class="modo1">
     <td><%= relacion_animal.animal.chenil.zona_id %>
     <td><%= relacion_animal.id %></td>
     <td><%= relacion_animal.animal1_id %></td>
@@ -42,7 +42,7 @@
 
  <!--   < @animal2 = Animal.find(@params[:relacion_animal.animal2_id]) >
     <td><= image_tag @animal2.foto.url(:thumb) > -->
-    <td><%= relacion_animal.animal2_id %></td>
+    <td><%= relacion_animal.animal2.zona_id %></td>
     <td><%= relacion_animal.animal2.nombre %></td>
    <% if relacion_animal.animal2.images.empty? %>
     <td><%= image_tag 'logo.png'%></td>

@@ -1,0 +1,104 @@
+<h1>Nuevo animal</h1>
+
+<fieldset id="moveanimal">
+<!--form-->
+<%= form_for(@animal, :html => {:multipart=>true}) do |f| %>
+
+  <div class="field">
+	<%= f.label :nombre %><br />
+	<%= f.text_field :nombre %>
+  </div>
+
+  <div>
+  <select name="animal[especie_id]"> 
+   <% @especies.each do |especie| %> 
+       <option value="<%= especie.id %>" 
+         <%= 'selected' if especie.id == @animal.especie_id %>>
+         <%= especie.nombre %> 
+       </option> 
+   <% end %> 
+  </select></div>
+
+  <div class="field">
+	<%= f.label :raza %><br />
+	<%= f.text_field :raza %>
+        <% @aux=:raza %>
+  </div>
+
+  <div class="field">
+	<%= f.label :edad %><br />
+	<%= f.text_field :edad %>
+  </div>
+
+  <div class="field">
+	<%= f.label :sexo %><br />
+	<%= f.text_field :sexo %>
+  </div>
+
+
+
+  <div class="field">
+	<%= f.label :Fecha_entrada %><br />
+	<%= f.date_select :fecha_entrada %>
+  </div>
+ 
+
+ <% @chenils=Chenil.where("chenils.zona_id = ?", @zona_id) %> 
+
+  <div>
+  <select name="animal[chenil_id]"> 
+   <% @chenils.each do |chenil| %> 
+       <option value="<%= chenil.id %>" 
+         <%= 'selected' if chenil.id == @animal.chenil_id %>>
+         <%= chenil.id %> 
+         <%= chenil.numero %> 
+         <%= chenil.zona.nombre %>
+       </option> 
+
+       <% @animal.zona_id=chenil.zona_id %>	
+
+   <% end %> 
+
+  </select></div>
+
+
+
+ <td><%= @aux%></td>
+ <!-- 
+  no se puede coger campo de objeto no guardado 
+  < @chenil=@animal.chenil > 
+  < @aux=chenil >
+  <td><= @chenil.id ></td>   -->
+
+
+  <div class="field">
+	<%= f.label :Observaciones %><br />
+  	<%= f.text_field :observaciones %>
+  </div> 
+
+<%= f.fields_for :images do  |image_fields| %>
+   <% if image_fields.object.new_record? %>
+	<p>
+   		<%= image_fields.file_field :image %>
+	</p>
+   <% end %>	
+<% end %>
+
+
+<!--  <div class="field">
+	<= f.label :Foto ><br />
+  	<= f.file_field :foto >
+  </div--> 
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+
+  
+
+<% end %>
+<!--/form-->
+</fieldset>
+
+
+<%= link_to 'Back', animals_path %>

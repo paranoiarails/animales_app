@@ -1,7 +1,6 @@
 
-<%= form_for @animal do |f| %>
 
-  <table>
+<table class="tabla">
   <tr>
     <th>Foto</th>
     <th>Nombre</th>
@@ -20,15 +19,19 @@
   </tr>
   </table>
 
-  <table>
-	<tr>
+<table class="tabla">
+	<tr class="modo2">
+		<th>Zona</th>
+		<td><%= @animal.zona.nombre %></td>
+		<th> -->> </th>
+		<th>Zona nueva</th>	
+		<td><%= @chenil.zona.nombre %></td>
+	</tr>
+ 	<tr class="modo3">
 		<th>Chenil</th>
+		<td><%= @animal.chenil.numero %></td>
 		<th>-->></th>
 		<th>Chenil nuevo</th>
-	</tr>
-	<tr>
-		<td><%= @animal.chenil.numero %></td>
-		<td> -->> </td>	
 		<td><%= @chenil.numero %></td>
 	</tr>
   </table>
@@ -36,11 +39,12 @@
 
 
 	<% @animal.chenil_id = @chenil.id %>
+	<% @animal.zona_id = @chenil.zona_id %>
 	
 	<% @animal.update_attributes(params[:animal]) %>
 
 
-<%end%>
+
 
 <%= link_to 'Back', animals_path %>
 

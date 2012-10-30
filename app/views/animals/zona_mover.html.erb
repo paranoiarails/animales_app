@@ -1,5 +1,5 @@
 
-<h1>Elegir Zona</h1>
+<h1>Elegir Zona a la que desea mover el animal</h1>
 
 
 <% @cont=0 %>
@@ -14,17 +14,16 @@
   <% if @cont == 1 %>
    <tr>
      <td>
- 	<%= link_to zona.nombre, :action=> "new", :id=> zona.id %>	
+ 	<%= link_to zona.nombre, :action=> "mover", :id1=> zona.id, :id2 => @animal.id %>	
      </td>
   <% end %>
   <% if @cont == 2%>
      <td>
- 	<%= link_to zona.nombre, :action=> "new", :id=> zona.id %>	
+ 	<%= link_to zona.nombre, :action=> "mover", :id1=> zona.id, :id2 => @animal.id %>	
 	<% @cont=0 %>
     </td>
    </tr>
   <% end %>
-
 
 
 <%end%>

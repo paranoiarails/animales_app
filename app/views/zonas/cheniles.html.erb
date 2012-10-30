@@ -1,5 +1,10 @@
 <h1>Listing chenils</h1>
 
+<% if current_persona.perfil.ocupacion_id == 1 %> 
+	<%= link_to 'Crear chenil nuevo', new_chenil_path %>
+<% end %>  
+
+
 <table>
   <tr>
     <th>Zona</th>
@@ -22,9 +27,32 @@
     <td><%= chenil.ocupado %></td>
     <td><%= chenil.capacidad %></td>
     <td><%= chenil.caplibre %></td>
-    <td><%= chenil.notas %></td>
+    <% if chenil.notas.blank? %>	
+	<td><%= "sin notas" %></td>
+    <% else %>
+	<td><%= link_to "notas chenil", chenil %></td>
+    <%end%>
     <td><%= chenil.estado %></td>
     <td><%= link_to 'Show', chenil %></td>
+    <% if current_persona.perfil.ocupacion_id == 1 %>   
+	<td><%= link_to 'Edit', edit_chenil_path(chenil) %></td>
+	<td><%= link_to 'Destroy', chenil, confirm: 'Are you sure?', method: :delete %></td>
+    <% end %>
+    </tr>
+
+    <% @animals.each do |animal| %>
+	<% if animal.chenil_id == chenil.id %>	
+              <td>
+	      <% if animal.images.empty? %>
+   		 <%= link_to image_tag('logo.png'), animal %>
+		 <%= animal.nombre %>
+   	      <% else %>
+    		 <%= link_to image_tag(animal.images.first.image.url(:thumb)), animal %>
+		 <%= animal.nombre %>
+  	      <%end%>
+	      </td>
+    <% end %>
+	<%end%>
 
   </tr>
   <% end %>
