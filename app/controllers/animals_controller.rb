@@ -13,12 +13,65 @@ before_filter :usuario_c_v_v, :only => [:destroy, :new, :edit, :mover]
   Limpiador=4
 
   def index
-    @animals = Animal.all
+
+  #animales x orden alfabetico
+   # @animals = Animal.all
+   # "HELLO".capitalize 
+#    @animals= Animal.order("nombre asc")
+ #  @animals = Animal.find(:all, :order => "fecha_entrada DESC")
+
+   $numero
+
+   if ($numero == 1 or $numero.nil?)
+   	@animals = Animal.search1(params[:search])
+        @numero= 1
+   end
+
+   if ($numero == 4)
+  	@animals = Animal.search4(params[:search])
+        @numero = 4
+   end
+#@shows = Show.find(:all, :order => "date")
+
+#.each do |animal|
+  #  @animals = Animal.order_by {|x| [x.nombre]}
+
   #  @animals = Animal.find(:all, :conditions => conditions)
     @chenils = Chenil.all
     @zonas = Zona.all
     @search = Search.new	
    # @cont
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @animals }
+    end
+  end
+
+  def ordenado
+   if (params[:id] == "1")
+        @animals = Animal.search1(params[:search])
+        @numero = 1
+   end
+
+   if (params[:id] == "2")
+     @animals = Animal.find(:all, :order => "fecha_entrada DESC")
+     @numero=2
+   end
+
+   if (params[:id] == "3")
+     @animals = Animal.find(:all, :order => "updated_at DESC")
+     @numero=3
+   end
+
+   if (params[:id] == "4")
+  	@animals = Animal.search4(params[:search])
+        @numero = 4
+   end
+
+    @chenils = Chenil.all
+    @zonas = Zona.all
+    @search = Search.new	
 
     respond_to do |format|
       format.html # index.html.erb

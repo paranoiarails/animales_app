@@ -79,10 +79,9 @@ match '/signout', :to => 'sessions#destroy'
 
 #animales new, para guardar zona.id
   match 'animals/new/:id', :to => 'animals#new#id' 
+  match 'ordenado', :to => 'animals#ordenado#id'
+
 ####################################################
-
-
-
 
 
 match '/contact', :to => 'pages#contact'

@@ -12,6 +12,8 @@
 
 class Zona < ActiveRecord::Base
 
+attr_accessible :nombre
+
 	has_many :chenils
 
 	has_many :animales

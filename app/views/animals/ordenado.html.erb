@@ -2,29 +2,29 @@
 
   <!--td>< @auxx ></td-->
 
-<!-- form_for @search do |f| %>
-  <p>
-    < f.label :nombre %>
-  
-    < f.label :zona_id %><br />
+<% if @numero==1 %>
+ <% $numero=1 %>
+ <%= form_tag animals_path, :method => 'get' do %>
 
-    < f.text_field :nombre %>
-
-    < f.collection_select :zona_id, Zona.all, :id, :nombre, :include_blank => true %>
-  </p>
-  <p>< f.submit %></p>
-< end %-->
-
-
-
-<%= form_tag animals_path, :method => 'get' do %>
-  <%= "Busqueda por nombre" %>
+    <%= "Busqueda por nombre" %>
   <p>
     <%= text_field_tag :search, params[:search] %>
-    <%= submit_tag "Search", :name => nil, :numero => "1" %>
+    <%= submit_tag "Buscar", :name => nil %>
   </p>
-<% end %>
+ <% end %>
+<%end%>
 
+<% if @numero==4 %>
+ <% $numero=4 %>
+ <%= form_tag animals_path, :method => 'get' do %>
+ 
+    <%= "Busqueda por raza" %>
+  <p>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Buscar", :name => nil %>
+  </p>
+ <% end %>
+<%end%>
 
 
 
@@ -42,8 +42,6 @@
 
 <!--fieldset id="moveanimal"-->
 <form>
-
-    <!--td>< link_to zona.nombre, :action=> "cheniles", :id=> zona.id %></td-->
 
 <table class="tabla">
   <tr>
@@ -73,7 +71,7 @@
    <%end%>
 
     <td><%= link_to animal.nombre, animal %></td>
-    <td><%= link_to animal.zona.nombre, :controller=> "zonas", :action=> "cheniles", :id=> animal.zona_id %></td>
+    <td><%= link_to animal.zona_id, :controller=>"zonas", :action=> "cheniles", :id=> animal.zona_id %></td>
     <td><%= animal.chenil.numero %></td>
     <td><%= animal.raza %></td>
     <td><%= animal.sexo %></td>

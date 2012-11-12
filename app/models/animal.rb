@@ -18,7 +18,6 @@
 #
 
 class Animal < ActiveRecord::Base
-
      attr_accessible :nombre, :raza, :sexo, :fecha_entrada, :observaciones, :chenil_id, :images_attributes, :especie_id, :zona_id, :edad
 
   belongs_to :chenil, :foreign_key=>'chenil_id'  
@@ -59,6 +58,39 @@ accepts_nested_attributes_for :images, :allow_destroy => true
 #                      :thumb => "60x60>",
 #                      :small => "150x150>"
 #                 }
+
+
+
+
+def self.search1(search)
+    if (search)
+      find(:all, :conditions => ['nombre LIKE ?', "%#{search}%"])
+    else
+      find(:all, :order => "nombre asc")
+    end
+end
+
+def self.search4(search)
+    if (search)
+      find(:all, :conditions => ['raza LIKE ?', "%#{search}%"])
+    else
+      find(:all, :order => "raza asc")
+    end
+end
+
+#def self.search(search, numero)
+#  if (search)
+#    if (numero ==1 )
+#    find(:all, :conditions => ['nombre LIKE ?', "%#{search}%"])
+#    #end
+#    else
+    #if (numero == 4)
+#    find(:all, :conditions => ['raza LIKE ?', "%#{search}%"])
+#    end
+#  else
+#    find(:all)
+#  end
+#end
 
 
 

@@ -1,5 +1,19 @@
 <p id="notice"><%= notice %></p>
 
+<% if ! current_persona.nil? && (current_persona.perfil.ocupacion_id == 1 || current_persona.perfil.ocupacion_id == 2 || current_persona.perfil.ocupacion_id == 3 ) %> 
+  <!--td>< link_to 'añadir foto', :action=> "add_foto", :id=> @animal.id ></td-->   
+  <p>
+  <td><%= link_to 'relaciones', :action=> "relacionesXanimal", :id=> @animal.id %></td>
+  <td><%= "  /   " %></td>
+  <td><%= link_to 'mover animal', :action=> "mover", :id1=> @animal.zona_id, :id2 => @animal.id %></td>
+  <td><%= "  /   " %></td>
+<!--  <td><= link_to 'relacion', :action=> "relaciones", :id=> @animal.id ></td> -->
+ 
+  <td><%= link_to 'Edit', edit_animal_path(@animal) %></td>
+  <td><%= "  /   " %></td>
+  <td><%= link_to 'Destroy', @animal, confirm: 'Are you sure?', method: :delete %></td>
+  </p>
+<% end %>
 
 <p>
   <b>Nombre:</b>
@@ -45,7 +59,7 @@
 
 <p>
   <b>Observaciones:</b>
-  <%= @animal.observaciones %>
+  <%= simple_format h @animal.observaciones %>
 </p>
 
 

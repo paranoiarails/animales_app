@@ -16,6 +16,8 @@
 
 class Chenil < ActiveRecord::Base
 
+attr_accessible :numero
+
 	belongs_to :zona, :foreign_key=>'zona_id'
 
 	has_many :animals

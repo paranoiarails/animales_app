@@ -1,4 +1,4 @@
-<h1>Fecha guardada correctamente</h1>
+<h1>Horarios</h1>
 
 
 
@@ -17,14 +17,17 @@
 		<% end %>
 	<% end %>
 
+      <table class="tabla">
+	<tr class="modo2">
 	<% if @igual == 1 %>
-		<%= "Ya tienes elegido este turno!!!" %>
+		<td><%= "Ya tienes elegido este turno!!!" %></td>
 	<% else %>
         	<% @horario.save %>
-		<%= "Turno guardado correctamente" %>
+		<td><%= "Turno guardado correctamente" %></td>
 	<% end %>
+        </tr>
+      </table>
 
-        <%= link_to 'Horarios', :action=> "index" %>
 
         <% @horarios=Horario.all %>
 <br />
@@ -37,37 +40,52 @@
  </h2>
  <%= calendar_for @horarios, :year => @date.year, :month => @date.month, :first_day_of_week =>1 do |t| %>
   <%= t.head('lunes', 'martes', 'miercoles', 'jueves', 'viernes', 'sabado', 'domingo') %>
-  <% t.day(:day_method => :fecha) do |date, horarios| %>
-    <%= date.day %>
+  <% t.day(:day_method => :fecha) do |date, horarios| %>  
+    <jj><%= date.day %></jj>
     <br />
-    <%= ('------------------')%>
-    <br />
-    <%= link_to 'Mañana', :action => "add_hora", :fecha=> date, :tarde=> 0 %>
-    <!-- check_box_tag "persona[horario_ids][]", horario.id, @persona.horarios.include?(horario) -->
+    <%= link_to 'Mañana', {:action => "add_hora", :fecha=> date, :tarde=> 0}, :class => "enlaceb" %>
+
     <ul>
      <% horarios.each do |hora| %>
         <% if hora.tarde==0 %>
-           <%= link_to h(hora.zona_id), hora %>
-	   <ul>	
+	   <% if hora.persona.id == current_persona.id %>	
+              <%= link_to h(hora.persona.nombre), hora %>
+	      <ul>
+           <% else %>
+	      <%= hora.persona.nombre %>
+	      <ul>	
+           <% end %>	
 	<% end %>
      <%end%>
 
     <br />
-    <%= link_to 'Tarde', :action => "add_hora", :fecha=> date, :tarde=> 1 %>
+ <!--cal class>
+  <ul-->
+    <%= link_to 'Tarde', {:action=> "add_hora", :fecha=> date, :tarde=> 1}, :class => "enlaceb" %>
+  <!--/ul>
+ </cal-->
+ 
     <ul> 
      <% horarios.each do |hora| %>
         <% if hora.tarde==1 %>
-           <%= link_to h(hora.zona_id), hora %>
-	   <ul>
+	   <% if hora.persona.id == current_persona.id %>
+               <%= link_to h(hora.persona.nombre), hora %>
+	       <ul>
+	   <% else %>
+	      <%= hora.persona.nombre %>
+	      <ul>
+           <% end %>
 	<% end %>
      <%end%>
+
   <% end %>
 <% end %>
+</table>
 </div>
 
 <br />
 
-<%= link_to 'New Horario', new_horario_path %>
+<!-- link_to 'New Horario', new_horario_path -->
 
 
 

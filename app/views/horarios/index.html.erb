@@ -12,10 +12,8 @@
  </h2>
  <%= calendar_for @horarios, :year => @date.year, :month => @date.month, :first_day_of_week =>1 do |t| %>
   <%= t.head('lunes', 'martes', 'miercoles', 'jueves', 'viernes', 'sabado', 'domingo') %>
-  <% t.day(:day_method => :fecha) do |date, horarios| %>
-    <%= date.day %>
-    <br />
-    <%= ('------------------')%>
+  <% t.day(:day_method => :fecha) do |date, horarios| %>  
+    <jj><%= date.day %></jj>
     <br />
     <%= link_to 'Mañana', {:action => "add_hora", :fecha=> date, :tarde=> 0}, :class => "enlaceb" %>
 
@@ -54,8 +52,9 @@
 
   <% end %>
 <% end %>
+</table>
 </div>
 
 <br />
 
-<%= link_to 'New Horario', new_horario_path %>
+<!-- link_to 'New Horario', new_horario_path -->
