@@ -1,7 +1,22 @@
 <h1>Horarios</h1>
 
+      <table class="tabla">
+	<tr class="modo3">
+		<th>ZONA<th>
+		<td><%= @zona.nombre %></td>
+        </tr>
+      </table>
 
 
+<% @zonas.each do |zona| %>
+	<!-- link_to zona.nombre, horarios_path -->
+
+        <%= link_to zona.nombre, :action => "index", :zona => zona.id %>
+        <td><%= "  /   " %></td>
+<%end%>
+
+</br>
+<%= "crear especifico para limpiadores.... es necesario distinguir por ocupacion o solo para limpiadores? (veterinario tiene su propia zona, no necesario)" %>
 <br />
 
 <div id="calendar">
@@ -12,14 +27,44 @@
  </h2>
  <%= calendar_for @horarios, :year => @date.year, :month => @date.month, :first_day_of_week =>1 do |t| %>
   <%= t.head('lunes', 'martes', 'miercoles', 'jueves', 'viernes', 'sabado', 'domingo') %>
-  <% t.day(:day_method => :fecha) do |date, horarios| %>  
-    <jj><%= date.day %></jj>
+  <% t.day(:day_method => :fecha) do |date, horarios| %>
+  <!-- t.day(:day_method => :fecha) do |date, diarios| -->
+    
+    <!--jj>< date ></jj-->
+    
+    <!-- @diario = @diarios.where("fecha = ?", date) -->
+    <% @diarios.each do |diario| %>
+	<% if diario.fecha==date %>
+		<% @diariovar=diario %>
+        <% end %>
+    <%end%>
+
+
+      <% if @diariovar.fecha==date %>   
+    <!--jj>< link_to date.day, :action => "diario_new", :controller => "diario", :fecha=> date, :zona=> @zona.id ></jj-->
+        <jj><%="tareas"%></jj>
+        <jj><%= link_to date.day, @diariovar %></jj> 
+     <% else %>
+        <jj><%="nuevo"%></jj>
+        <jj><%= link_to date.day, new_diario_path(@diario, :fecha=> date, :zona=> @zona.id) %></jj>
+     <%end%>
+
+	
+   
+   
+
+
+
+
     <br />
-    <%= link_to 'Mañana', {:action => "add_hora", :fecha=> date, :tarde=> 0}, :class => "enlaceb" %>
+    <%= link_to 'Mañana', {:action => "add_hora", :fecha=> date, :tarde=> 0, :zona=> @zona.id}, :class => "enlaceb" %>
 
     <ul>
+
+     <% @cont=0 %>
      <% horarios.each do |hora| %>
         <% if hora.tarde==0 %>
+           <% @cont=@cont+1 %>
 	   <% if hora.persona.id == current_persona.id %>	
               <%= link_to h(hora.persona.nombre), hora %>
 	      <ul>
@@ -30,16 +75,22 @@
 	<% end %>
      <%end%>
 
-    <br />
+     <% while @cont<3 %>
+	</br>
+	<% @cont = @cont+1 %>
+     <%end%>			
+
  <!--cal class>
   <ul-->
-    <%= link_to 'Tarde', {:action=> "add_hora", :fecha=> date, :tarde=> 1}, :class => "enlaceb" %>
+    <%= link_to 'Tarde', {:action=> "add_hora", :fecha=> date, :tarde=> 1, :zona=> @zona.id}, :class => "enlaceb" %>
   <!--/ul>
  </cal-->
  
+    <%@cont=0%>
     <ul> 
      <% horarios.each do |hora| %>
         <% if hora.tarde==1 %>
+        <% @cont=@cont+1 %>
 	   <% if hora.persona.id == current_persona.id %>
                <%= link_to h(hora.persona.nombre), hora %>
 	       <ul>
@@ -50,8 +101,15 @@
 	<% end %>
      <%end%>
 
+     <% while @cont<3 %>
+	</br>
+	<% @cont = @cont+1 %>
+     <%end%>
+
   <% end %>
 <% end %>
+
+
 </table>
 </div>
 

@@ -4,7 +4,7 @@
 
 	<% @horario.fecha = @fecha %> 
 
-	<% @horario.zona_id = 1 %>
+	<% @horario.zona_id = @zona.id %>
         <% @horario.persona_id = @persona.id %>
         <% @horario.tarde = @tarde %>
         
@@ -12,12 +12,16 @@
 
 	<% @igual=0 %>
         <% @guardados.each do |guard| %>
-		<% if @horario.persona.id == guard.persona.id && @horario.tarde == guard.tarde %>
+		<% if @horario.persona.id == guard.persona.id && @horario.tarde == guard.tarde && @horario.zona_id== guard.zona_id %>
 			<% @igual=1 %>
 		<% end %>
 	<% end %>
 
       <table class="tabla">
+	<tr class="modo3">
+		<th>ZONA<th>
+		<td><%= @zona.nombre %></td>
+        </tr>
 	<tr class="modo2">
 	<% if @igual == 1 %>
 		<td><%= "Ya tienes elegido este turno!!!" %></td>
@@ -29,8 +33,13 @@
       </table>
 
 
-        <% @horarios=Horario.all %>
-<br />
+     <% @horarios = Horario.where("zona_id = ?", @zona) %>
+
+
+<% @zonas.each do |zona| %>
+	<%= link_to zona.nombre, horarios_path %>
+        <td><%= "  /   " %></td>
+<%end%>
 
 <div id="calendar">
  <h2 id="month">
@@ -43,7 +52,7 @@
   <% t.day(:day_method => :fecha) do |date, horarios| %>  
     <jj><%= date.day %></jj>
     <br />
-    <%= link_to 'Mañana', {:action => "add_hora", :fecha=> date, :tarde=> 0}, :class => "enlaceb" %>
+    <%= link_to 'Mañana', {:action => "add_hora", :fecha=> date, :tarde=> 0, :zona=> @zona.id}, :class => "enlaceb" %>
 
     <ul>
      <% horarios.each do |hora| %>
@@ -61,7 +70,7 @@
     <br />
  <!--cal class>
   <ul-->
-    <%= link_to 'Tarde', {:action=> "add_hora", :fecha=> date, :tarde=> 1}, :class => "enlaceb" %>
+    <%= link_to 'Tarde', {:action=> "add_hora", :fecha=> date, :tarde=> 1, :zona => @zona.id}, :class => "enlaceb" %>
   <!--/ul>
  </cal-->
  

@@ -1,0 +1,82 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Zona:</b>
+  <%= @diario.zona_id %>
+</p>
+
+<p>
+  <b>Fecha:</b>
+  <%= @diario.fecha %>
+</p>
+
+
+
+<p>
+  <jj><%= link_to "añadir tarea nueva", new_tarea_path(@tarea, :fecha=> @diario.fecha, :zona=> @diario.zona_id) %></jj>
+  <!-- link_to 'añadir tareas', :action => "add_tareas", :id=> @diario.id -->
+</p>
+
+<div class="roundB">
+<ul>
+<p>
+  <b>Tareas:</b>
+  <%= simple_format h @diario.tareas %>
+</p>
+</ul>
+
+
+<table>
+<% @tareas.each do |tarea| %>
+    <tr>
+	<td><%= tarea.nombre %><td>
+	<% if tarea.hecho.nil? %>
+
+		<%= form_for(tarea) do |f| %>		
+		
+      		<br><%= f.radio_button :hecho, "1", :checked=>false %>
+      		<%= "Hecho" %>
+
+		<%= f.submit 'Save', class: 'button' %>
+		<%end%>
+	<% else %>
+		<%= "ok" %>
+
+
+
+	<% end %>
+	<td><%= tarea.persona_id %><td>
+    </tr>
+    <% tarea.save %>
+<% end %>
+</table>
+</div>
+
+</br>
+  <div class="actions">
+  
+<p>
+  <%= link_to 'añadir informe', :action => "add_informe", :id=> @diario.id %>
+</p>
+
+  </div>
+
+
+
+<div class="roundB">
+<ul>
+<p>
+  <b>Informe:</b>
+  <%= simple_format h @diario.informe %>
+</p>
+</ul>
+</div>
+
+
+
+
+<p>
+<%= link_to 'Edit', edit_diario_path(@diario) %> |
+<%= link_to 'Back', diarios_path %>
+</p>
+

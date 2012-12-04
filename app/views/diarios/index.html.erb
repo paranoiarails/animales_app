@@ -1,0 +1,29 @@
+<h1>Listing diarios</h1>
+
+<table>
+  <tr>
+    <th>Zona</th>
+    <th>Fecha</th>
+    <th>Tareas</th>
+    <th>Informe</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @diarios.each do |diario| %>
+  <tr>
+    <td><%= diario.zona_id %></td>
+    <td><%= diario.fecha %></td>
+    <td><%= diario.tareas %></td>
+    <td><%= diario.informe %></td>
+    <td><%= link_to 'Show', diario %></td>
+    <td><%= link_to 'Edit', edit_diario_path(diario) %></td>
+    <td><%= link_to 'Destroy', diario, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Diario', new_diario_path %>

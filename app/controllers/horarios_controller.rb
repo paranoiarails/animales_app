@@ -2,10 +2,23 @@ class HorariosController < ApplicationController
   # GET /horarios
   # GET /horarios.json
   def index
-    @horarios = Horario.all
+    @zonas = current_persona.perfil.zonas
+
     @persona = current_persona
     @date = params[:month] ? Date.parse(params[:month]) : Date.today
     @fecha
+    
+
+
+    if params[:zona]!=nil
+       @zona = Zona.find(params[:zona])
+    else
+       @zona = @zonas.first
+    end
+    #@horarios = Horario.all
+    @horarios = Horario.where("zona_id = ?", @zona)
+    @diarios = Diario.where("zona_id = ?", @zona)
+    @diariovar = Diario.new
 
     respond_to do |format|
       format.html # index.html.erb
@@ -16,11 +29,15 @@ class HorariosController < ApplicationController
   def add_hora
 	@persona = current_persona
 	@horario = Horario.new
-    @horarios = Horario.all
+        @zonas = current_persona.perfil.zonas
+
     @fecha = Date.parse(params[:fecha])
     @date = params[:month] ? Date.parse(params[:month]) : Date.today
     @tarde = params[:tarde]
     @guardados = Horario.find(:all, :conditions => ["fecha = ?", @fecha])
+
+       @zona = Zona.find(params[:zona])
+       @horarios = Horario.where("zona_id = ?", @zona)
   end
 
   # GET /horarios/1

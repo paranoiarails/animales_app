@@ -1,4 +1,6 @@
 Pruebaanimales3::Application.routes.draw do
+  resources :diarios
+
   resources :horarios
 
   resources :especies
@@ -57,7 +59,13 @@ match 'ad_perfil', :to => 'personas#ad_perfil#id'
 
 match 'new_perf', :to => 'personas#new_perf#id'
 
-match 'add_hora', :to => 'horarios#add_hora#date#tarde'
+match 'add_hora', :to => 'horarios#add_hora#date#tarde#zona'
+match 'horarios', :to => 'horarios#index#zona'
+match 'diarios_new', :to => 'diarios#new#fecha#zona'
+match 'tareas_new', :to => 'tareas#new#fecha#zona'
+match 'add_informe', :to => 'diarios#add_informe#id'
+#match 'add_tareas', :to => 'diarios#add_tareas#id'
+#match 'añadir_tareas', :to =>'diarios#añadir_tareas#fecha#zona'
 
 match 'cheniles', :to => 'zonas#cheniles#id'
 match 'coordz', :to => 'zonas#coord'

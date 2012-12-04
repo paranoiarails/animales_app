@@ -1,5 +1,12 @@
 <p id="notice"><%= notice %></p>
 
+<% if current_persona.perfil.ocupacion_id == 1 %>      
+       <td><%= link_to 'Edit', edit_zona_path(@zona) %></td> 
+       <td><%= "  /   " %></td>
+       <td><%= link_to 'Destroy', @zona, confirm: 'Are you sure?', method: :delete %>
+</p>
+<% end %>
+
 <p>
   <b>Nombre:</b>
   <%= @zona.nombre %>

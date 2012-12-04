@@ -25,6 +25,8 @@ class TareasController < ApplicationController
   # GET /tareas/new.json
   def new
     @tarea = Tarea.new
+    $fecha = params[:fecha]
+    $zona = params[:zona]
 
     respond_to do |format|
       format.html # new.html.erb
@@ -41,10 +43,16 @@ class TareasController < ApplicationController
   # POST /tareas.json
   def create
     @tarea = Tarea.new(params[:tarea])
+    #$fecha = params[:fecha]
+    #$zona = params[:zona]
+    @tarea.zona_id = $zona
+    @tarea.fecha = $fecha	
+    @diario = Diario.find(:all, :conditions => ["zona_id = ? AND fecha = ?", $zona, $fecha])
+    @tarea.persona_id=current_persona.id
 
     respond_to do |format|
       if @tarea.save
-        format.html { redirect_to @tarea, notice: 'Tarea was successfully created.' }
+        format.html { redirect_to @diario, notice: 'Tarea nueva creada correctamente.' }
         format.json { render json: @tarea, status: :created, location: @tarea }
       else
         format.html { render action: "new" }
@@ -57,10 +65,12 @@ class TareasController < ApplicationController
   # PUT /tareas/1.json
   def update
     @tarea = Tarea.find(params[:id])
+    @diario = Diario.find(:all, :conditions => ["zona_id = ? AND fecha = ?", @tarea.zona_id, @tarea.fecha])
+    @tarea.personaHecho_id=current_persona.id
 
     respond_to do |format|
       if @tarea.update_attributes(params[:tarea])
-        format.html { redirect_to @tarea, notice: 'Tarea was successfully updated.' }
+        format.html { redirect_to @diario, notice: 'Tarea modificada correctamente.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

@@ -2,10 +2,20 @@
 
 <% if current_persona.perfil.ocupacion_id == 1 %> 
 	<%= link_to 'Crear chenil nuevo', new_chenil_path %>
+        </p>
 <% end %>  
 
 
-<table>
+<table class="tabla">
+
+  <tr class="modo2">
+    <th>Zona</th>
+    <td><%= @zona.nombre %></td> 
+    <td></td>
+    <td></td>
+    <td></td>     
+  </tr>
+
   <tr>
     <th>Zona</th>
     <th>Numero</th>
@@ -21,7 +31,7 @@
 
 <% @chenils.each do |chenil| %>
   <% if @zona.id == chenil.zona_id %> 
-  <tr>
+  <tr class="modo3">
     <td><%= @zona.nombre %></td>
     <td><%= chenil.numero %></td>
     <td><%= chenil.ocupado %></td>
@@ -34,10 +44,12 @@
     <%end%>
     <td><%= chenil.estado %></td>
     <td><%= link_to 'Show', chenil %></td>
-    <% if current_persona.perfil.ocupacion_id == 1 %>   
-	<td><%= link_to 'Edit', edit_chenil_path(chenil) %></td>
-	<td><%= link_to 'Destroy', chenil, confirm: 'Are you sure?', method: :delete %></td>
-    <% end %>
+    <td></td>
+    <td></td>
+    <!-- if current_persona.perfil.ocupacion_id == 1 %>   
+	<td>< link_to 'Edit', edit_chenil_path(chenil) %></td>
+	<td>< link_to 'Destroy', chenil, confirm: 'Are you sure?', method: :delete %></td>
+    < end %-->
     </tr>
 
     <% @animals.each do |animal| %>

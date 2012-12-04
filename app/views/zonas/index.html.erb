@@ -6,9 +6,10 @@
 
 <% if current_persona.perfil.ocupacion_id == 1 %>
     <%= link_to 'Crear zona nueva', new_zona_path %>
+    </p>
 <% end %>
 
-<table>
+<table class="tabla">
   <tr>
     <th>Nombre</th>
     <th>Notas</th>
@@ -26,10 +27,10 @@
     <td><%= zona.notas %></td>
     <td><%= zona.text %></td>
     <td><%= link_to 'Show', zona %></td>
-<% if current_persona.perfil.ocupacion_id == 1 %>      
-       <td><%= link_to 'Edit', edit_zona_path(zona) %></td>
-       <td><%= link_to 'Destroy', zona, confirm: 'Are you sure?', method: :delete %>
-<% end %>
+<!-- if current_persona.perfil.ocupacion_id == 1 %>      
+       <td>< link_to 'Edit', edit_zona_path(zona) %></td>
+       <td>< link_to 'Destroy', zona, confirm: 'Are you sure?', method: :delete %>
+< end %-->
   </tr>
   <%end%>
 <% end %>
@@ -41,10 +42,10 @@
     <td><%= zona.notas %></td>
     <td><%= zona.text %></td>
     <td><%= link_to 'Show', zona %></td>
-<% if current_persona.perfil.ocupacion_id == 1 %>      
-       <td><%= link_to 'Edit', edit_zona_path(zona) %></td>
-       <td><%= link_to 'Destroy', zona, confirm: 'Are you sure?', method: :delete %>
-<% end %>
+<!-- if current_persona.perfil.ocupacion_id == 1 %>      
+       <td>< link_to 'Edit', edit_zona_path(zona) %></td>
+       <td>< link_to 'Destroy', zona, confirm: 'Are you sure?', method: :delete %>
+< end %-->
 
   </tr>
   <%end%>

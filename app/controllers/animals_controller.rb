@@ -218,7 +218,7 @@ before_filter :usuario_c_v_v, :only => [:destroy, :new, :edit, :mover]
         @animal.zona_id=@animal.chenil.zona_id
 	@animal.save
       else
-        format.html { render action: "new", notice: 'No se puedo crear animal nuevo.' }
+        format.html { render action: "new", notice: 'No se puede crear animal nuevo.' }
         format.json { render json: @animal.errors, status: :unprocessable_entity }
       end
     end
