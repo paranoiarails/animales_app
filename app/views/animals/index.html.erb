@@ -30,7 +30,6 @@
 
 <% if ! current_persona.nil? && current_persona.perfil.ocupacion_id == 1 %>    
 	<p><%= link_to 'Añadir nuevo animal', :action=> "zona" %></p>
-	<hr />
 <% end %>
 
 <!-- form_tag animals_patch, :method => 'get' do |f| %>
@@ -41,7 +40,7 @@
 < end -->
 
 <!--fieldset id="moveanimal"-->
-<form>
+<!--<form>-->
 
     <!--td>< link_to zona.nombre, :action=> "cheniles", :id=> zona.id %></td-->
 
@@ -100,7 +99,7 @@
 <%end%>
 
 </table>
-</form>
+<!--</form>-->
 <!--/fieldset-->
 
 <br />

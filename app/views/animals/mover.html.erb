@@ -4,23 +4,7 @@
 <%end%>
 
 <table class="tabla">
- <% @chenils.each do |chenil| %>
-  <% if (chenil.id == @animal.chenil_id ) %>
-	<tr class="modo3">
- 	 <th>Chenil</th>
-  	 <td><%= chenil.numero %></td>
-  	 <th>Zona</th>
-  	 <td><%= chenil.zona.nombre %></td>
- 	 <th></th>
- 	</tr>
-  <% end %>
- <% end %>
-
  
-
-
-
-
   <tr>
     <th>Zona</th>
     <th>Chenil</th>
@@ -51,8 +35,7 @@
     <th>Foto</th>
     <th>Nombre</th>
     <th>Relacion</th>
-    <th></th>
-    <th></th>
+
   </tr-->
 
 
@@ -87,6 +70,17 @@
    <%end%> 
   <%end%>
 
+ <% @chenils.each do |chenil| %>
+  <% if (chenil.id == @animal.chenil_id ) %>
+	<tr class="modo3">
+ 	 <th>Chenil</th>
+  	 <td><%= chenil.numero %></td>
+  	 <th>Zona</th>
+  	 <td><%= chenil.zona.nombre %></td>
+ 	 <th></th>
+ 	</tr>
+  <% end %>
+ <% end %>
 
   <tr>
     <th>Foto</th>
@@ -94,7 +88,7 @@
     <th>Relacion</th>
     <th></th>
     <th></th>
-    <th></th>
+
   </tr>
 
 
@@ -116,25 +110,35 @@
 		<td><%= image_tag animal.images.first.image.url(:thumb) %></td>
 	    <% end %>
 	    <td><%= animal.nombre %></td>
-	    <% @cont=0 %>
-
+	    <% @existe=0 %>
+	    
      	    <% @relacion_animals.each do |relacion| %>
 		<% if ((relacion.animal1_id == @animal.id && relacion.animal2_id == animal.id) || (relacion.animal2_id == @animal.id && relacion.animal1_id == animal.id )) %>
 		     <td><%= relacion.relacion %></td>
-		     <% @cont=1 %>
+		     <% @existe=1 %>
 		     
-		     <% if (relacion.relacion==2)%>
-			  <% @contfin=2 %>
+		     <% if (relacion.relacion=='pelea')%>
+			  <% @contpelea=1 %>
 		     <% end %>	
+		     <% if (relacion.relacion=='regular')%>
+			  <% @contregular=1 %>
+		     <% end %>	
+		     <% if (relacion.relacion=='sin info')%>
+			  <% @continfo=1 %>
+		     <% end %>	
+		     <% if (relacion.relacion=='bien')%>
+			  <% @contbien=1 %>
+		     <% end %>	
+
 	        <%end%>
 	    <%end%>	
 
-	    <% if (@cont!=1) %>
-		<td><%= "0" %></td>
-		<% if (@contfin!=2) %>
-			<% @contfin=0 %>	
-	        <%end%>
+	    <% if (@existe!=1) %>
+		<td><%= "sin info" %></td>
+                <% @continfo=1 %>
 	    <%end%>
+
+	    
 	    <td></td>
 	    <td></td>
 	</tr>		
@@ -143,6 +147,23 @@
     <%end%> 
   <%end%>
 
+  <% if (@contpelea==1) %>
+      <% @contfin='pelea' %>			
+  <% else %>
+      <% if (@contregular==1) %>
+	  <% @contfin='regular'  %>
+      <% else %>
+	  <% if (@continfo==1) %>
+		<% @contfin='sin info'%>
+	  <% else %>
+	  	<%if (@contbien==1) %>
+			<% @contfin='bien' %>
+	  	<% else %>
+			<% @contfin='sin animales' %>
+		<%end%>
+	  <%end%>
+      <%end%>
+  <%end%>
 
   <tr class="modo3">
      <th>Chenil</th>
@@ -157,6 +178,11 @@
 
 <!--/form>
 </fieldset-->
+
+<% @contpelea=0 %>
+<% @contregular=0 %>
+<% @continfo=0 %>
+<% @contbien=0 %>
 
  <%end%>
 

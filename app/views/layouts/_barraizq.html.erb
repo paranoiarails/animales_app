@@ -1,0 +1,67 @@
+<div id="columna_izq">
+<!--
+<nav class="imalogo" align="center" valign="center">
+<%= image_tag("imagen_protectora.jpeg", :alt => "Protectora Animales Málaga") %>
+</nav>
+-->
+
+<!--div id="imalogo" width="200">
+	<%= image_tag("imagen_protectora.jpeg", :alt => "Protectora Animales 		Málaga", :class => "imalogo") %>
+<div-->
+
+<nav class="bloque_left_logos_institucionales">
+   <% if ! current_persona.nil? && current_persona.perfil.ocupacion_id == 1 %>    
+ 	<p><%= link_to 'Crear enlace nuevo', :action=> "new", :controller=>"menus" %></p>
+	<hr />
+   <% end %>
+
+   <%@menus=Menu.all%>
+   <%@submenus=Submenu.all%>
+
+
+		<!-- @menus.each do |men| %>
+
+			  <li_men>< link_to men.titulo, men %><li_men>			
+
+		
+		  
+		< end %-->
+
+
+
+<!--ul class="dropdown-menu" style="display:block"-->
+
+
+	<% @menus.each do |men| %>
+	    <li class="dropdown-submenu">
+                <td><%= link_to men.titulo, men %></td>
+		<!--a class="btn btn-warning" tabindex="-1" href=<%men%>><%= men.titulo%></a-->
+                </br>
+                <% @sub1 = Submenu.find(:all, :conditions => ["menu_id = ?", men.id]) %> 
+		<% if !@sub1.empty? %>
+
+		  <ul class="dropdown-menu">
+	             <% @sub1.each do |sub| %>
+		       <li_men><%= link_to sub.titulo, sub  %></li_men>
+		     <% end %>
+		  </ul>
+
+		<% end %>
+	     </li>
+         <%end%>
+		    
+       </ul>
+   
+
+</nav>
+      
+	<nav class="bloque_left_logos_institucionales">
+		<p>aqui van los logos de las instituciones</p>
+		<p>aqui van los logos de las instituciones</p>
+		<p>aqui van los logos de las instituciones</p>
+		<p>aqui van los logos de las instituciones</p>
+		<p>aqui van los logos de las instituciones</p>
+	</nav>
+
+
+</div>

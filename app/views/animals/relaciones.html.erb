@@ -42,9 +42,8 @@
    <% end %> 
   </select></div> 
 
-    <div class="field">
-    <%= f.label :relacion %><br />
-    <%= f.number_field :relacion %>
+  <div class="field">
+     <%= f.select :relacion, ["", "pelea","regular", "sin info", "bien"] %>
   </div>
 
   <div class="actions">

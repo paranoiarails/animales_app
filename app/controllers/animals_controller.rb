@@ -146,8 +146,24 @@ before_filter :usuario_c_v_v, :only => [:destroy, :new, :edit, :mover]
 
   def relacionesXanimal
     @animal = Animal.find(params[:id])
-    @zona = @animal.chenil.zona_id
+    @zona = @animal.zona_id
     @relacion_animals = RelacionAnimal.all
+    @relacionplus = RelacionAnimal.find(:all, :conditions => ["animal1_id = ? OR animal2_id = ?", @animal.id, @animal.id])
+   
+   # @animalZona1 = @relacionplus.where(:all, :conditions =>["animal1_id = ? AND animal2_id.zona_id = ?", @animal.id, @zona ])
+   # @animalZona2= @relacionplus.find(:all, :conditions =>["animal2_id = ? AND animal1_id.zona_id = ?", @animal.id, @zona])
+
+   #@animalChenil = @animalZona.find(:all, :condition =>[""])
+    
+
+#NOOOOOO pq lo importante es que animal1 este en la relacion
+#@animalesChenil
+#@animalesZona
+#investigando--------------------------------------------------------
+#    @chenils = Chenil.find(:all, :conditions => ["zona_id = ?", @zona.id])
+#    @relacion_animals = RelacionAnimal.find(:all, :conditions => ["animal1_id = ? OR animal2_id = ?", @animal.id, @animal.id])	
+#-------------------------------------------------------------------
+
 
     respond_to do |format|
       format.html # index.html.erb

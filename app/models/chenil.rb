@@ -16,6 +16,9 @@
 
 class Chenil < ActiveRecord::Base
 
+attr_accessible :ocupado, :capacidad, :caplibre, :zona_id, :notas, :estado
+
+
 attr_accessible :numero
 
 	belongs_to :zona, :foreign_key=>'zona_id'

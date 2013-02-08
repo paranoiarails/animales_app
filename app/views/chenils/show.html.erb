@@ -1,11 +1,12 @@
+<table class="tabla">
 <p id="notice"><%= notice %></p>
 
 
 <% if current_persona.perfil.ocupacion_id == 1 %>   
 	<p>
-	<td><%= link_to 'Edit', edit_chenil_path(@chenil) %></td>
-	<td><%= "  /   " %></td>				
-	<td><%= link_to 'Destroy', @chenil, confirm: 'Are you sure?', method: :delete %></td>
+	<%= link_to 'Edit', edit_chenil_path(@chenil) %>
+	<%= "  /   " %>				
+	<%= link_to 'Destroy', @chenil, confirm: 'Are you sure?', method: :delete %>
 	</p>
 	<% end %>
 
@@ -38,5 +39,8 @@
   <%= @chenil.estado %>
 </p>
 
+ 
 <p></p>
-<%= link_to 'Back', chenils_path %>
+<td><%= link_to 'back', :action=> "cheniles", :controller=> "zonas", :id=> @chenil.zona_id %></td> 
+
+</table>

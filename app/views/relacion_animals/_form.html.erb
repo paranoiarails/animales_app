@@ -1,16 +1,5 @@
 
 
-<!--  <div>
-  <select name="@z"> 
-   <% @zonas.each do |zona| %> 
-       <option value="<%= zona.id %>" 
-         <%= 'selected' if zona.id == @z %>> 
-         <%= zona.nombre %> 
-       </option> 
-   <% end %> 
-  </select></div> --> 
-
-
 <%= form_for(@relacion_animal) do |f| %>
   <% if @relacion_animal.errors.any? %>
     <div id="error_explanation">
@@ -24,42 +13,6 @@
     </div>
   <% end %>
 
-
-<!--   if @z == animal.chenil.zona_id   -->
- 
-
-  <div>
-  <select name="relacion_animal[animal1_id]"> 
-   <% @animals.each do |animal| %> 
-       <option value="<%= animal.id %>" 
-         <%= 'selected' if animal.chenil.zona_id == @z %>> 
-         <%= animal.nombre %> 
-       </option> 
-   <% end %> 
-  <td>< relacion_animal.animal.chenil.zona_id </td>
-  </select></div> 
-
-
-  <div>
-  <select name="relacion_animal[animal2_id]"> 
-   <% @animals.each do |animal| %> 
-       <option value="<%= animal.id %>" 
-         <%= 'selected' if animal.chenil.zona_id == relacion_animal.animal.chenil.zona_id %>> 
-         <%= animal.nombre %> 
-       </option> 
-   <% end %> 
-  </select></div> 
-
-
-
-  <div class="field">
-    <%= f.label :relacion %><br />
-    <%= f.number_field :relacion %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
 
 
 

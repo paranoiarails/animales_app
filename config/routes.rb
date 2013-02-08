@@ -1,4 +1,10 @@
 Pruebaanimales3::Application.routes.draw do
+  resources :submenus
+
+  resources :menus
+
+  resources :articulos
+
   resources :diarios
 
   resources :horarios

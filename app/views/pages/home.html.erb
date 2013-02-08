@@ -1,8 +1,109 @@
-<h1>Sample App</h1>
+<h1>Inicio</h1>
+
+<ul class="breadcrumb">
+    <li><a href="#">Home</a> <span class="divider">/</span></li>
+    <li><a href="#">Library</a> <span class="divider">/</span></li>
+    <li class="active">Data</li>
+</ul>
+
+<div id="container">
+
+<!--ul class="dropdown-menu" style="display:block">
+    <li><a tabindex="-1" href="#">Action</a></li>
+    <li><a tabindex="-1" href="#">Another action</a></li>
+    <li><a tabindex="-1" href="#">Something else here</a></li>
+    <li class="divider"></li>
+    <li><a tabindex="-1" href="#">Separated link</a></li>
+</ul-->
+
+<% if ! current_persona.nil? && current_persona.perfil.ocupacion_id == 1 %>    
+	<p><%= link_to 'Crear articulo nuevo', new_articulo_path %></p>
+	<hr />
+<% end %>
+
+<%@articulos=Articulo.all%>
+
+<div id="area_noticias">
+<div id="fila">
+<div id="noticias1">
+<!--table-->
+<section class="roundtitulo">
+<t>
+Noticias Animales y Plantas
+</t>
+</section>
+<% @articulos.each do |f| %>
+ <% if f.animales!=0 %>
+  <%= f.title %>
+  </br>
+  <% if f.Picture.exists? then %>
+	<%= image_tag f.Picture.url(:thumb) %>
+  <% end %>
+  <t2><%= f.content %></t2>
+  </br>
+  <li_not><%= link_to 'leer mas...', f %></li_not>
+  </br>
+ <%end%>
+<%end%>
+<!--/table-->
+</div>
+<!--div id="columna3"-->
+<!--div class="separadornoticias" width="10"> </div-->
+<!--td width="10"> </td-->
+<!--/div-->
+<div id="noticias2">
+<section class="roundtitulo">
+<t>
+Otras noticias
+</t>
+</section>
+<% @articulos.each do |f| %>
+ <% if f.animales==0 %>
+  <%= f.title %>
+  </br>
+  <% if f.Picture.exists? then %>
+	<%= image_tag f.Picture.url(:thumb) %>
+  <% end %>
+  <t2><%= f.content %></t2>
+  </br>
+  <li_not><%= link_to 'leer mas...', f %></li_not>
+  </br>
+ <%end%>
+<%end%>
+</div>
+</div>
+</div>
+</br>
+
+<!--table width="100%" height="100%" cellspacing="0" border="0">
+
+<table align="left" cellspacing="0" cellpadding="0"-->
+
+<!--td width="50%" valign="left">
+<table width="50%" cellspacing="0" cellpadding="0"-->
+
 <p>
 This is the home page for the
 <a href="http://railstutorial.org/">Ruby on Rails Tutorial</a>
 sample application.
 </p>
-<%= link_to "Sign up now!", signup_path, :class => "signup_button" %>
 
+<!--td width="50%" valign="right"-->
+<!--table width="50%" cellspacing="0" cellpadding="0"-->
+<p>
+This is the home page for the
+<a href="http://railstutorial.org/">Ruby on Rails Tutorial</a>
+sample application.
+</p>
+
+<p>
+This is the home page for the
+<a href="http://railstutorial.org/">Ruby on Rails Tutorial</a>
+sample application.
+</p>
+<p>
+<%= link_to "Sign up now!", signup_path, :class => "signup_button" %>
+</p>
+
+<!--/table-->
+</div>

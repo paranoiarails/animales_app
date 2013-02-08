@@ -12,7 +12,7 @@
 
 class Zona < ActiveRecord::Base
 
-attr_accessible :nombre
+attr_accessible :nombre, :notas, :text
 
 	has_many :chenils
 

@@ -1,0 +1,23 @@
+<p id="notice"><%= notice %></p>
+
+
+<% if @submenu.Picture.exists? then %>
+
+	<%= image_tag @submenu.Picture.url(:small), :align=>'right', :style=> "border:20px solid white" %>
+
+<% end %>
+
+
+<p>
+  <b>Titulo:</b>
+  <%= @submenu.titulo %>
+</p>
+
+<p>
+  <b>Contenido:</b>
+  <%= simple_format h @submenu.contenido %>
+</p>
+
+
+<%= link_to 'Edit', edit_submenu_path(@submenu) %> |
+<%= link_to 'Back', submenus_path %>

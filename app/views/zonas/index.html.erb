@@ -26,7 +26,8 @@
     <!--td><!-- zona.nombre ></td-->
     <td><%= zona.notas %></td>
     <td><%= zona.text %></td>
-    <td><%= link_to 'Show', zona %></td>
+    <td><%= link_to 'Ficha', zona %></td>
+    <td><%= link_to 'Cheniles', :action=> "cheniles", :id=> zona.id %></td> 
 <!-- if current_persona.perfil.ocupacion_id == 1 %>      
        <td>< link_to 'Edit', edit_zona_path(zona) %></td>
        <td>< link_to 'Destroy', zona, confirm: 'Are you sure?', method: :delete %>
@@ -41,7 +42,8 @@
     <td><%= link_to zona.nombre, :action=> "cheniles", :id=> zona.id %></td>
     <td><%= zona.notas %></td>
     <td><%= zona.text %></td>
-    <td><%= link_to 'Show', zona %></td>
+    <td><%= link_to 'Ficha', zona %></td>
+    <td><%= link_to 'Cheniles', :action=> "cheniles", :id=> zona.id %></td>  
 <!-- if current_persona.perfil.ocupacion_id == 1 %>      
        <td>< link_to 'Edit', edit_zona_path(zona) %></td>
        <td>< link_to 'Destroy', zona, confirm: 'Are you sure?', method: :delete %>

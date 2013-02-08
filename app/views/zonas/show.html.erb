@@ -1,12 +1,17 @@
+<table class="tabla">
 <p id="notice"><%= notice %></p>
 
-<% if current_persona.perfil.ocupacion_id == 1 %>      
-       <td><%= link_to 'Edit', edit_zona_path(@zona) %></td> 
-       <td><%= "  /   " %></td>
-       <td><%= link_to 'Destroy', @zona, confirm: 'Are you sure?', method: :delete %>
+<% if current_persona.perfil.ocupacion_id == 1 %>   
+   <tr>   
+<p>
+       <%= link_to 'Edit', edit_zona_path(@zona) %> 
+       <%= "  /   " %>
+       <%= link_to 'Destroy', @zona, confirm: 'Are you sure?', method: :delete %>
 </p>
+   </tr>
 <% end %>
 
+<tr>
 <p>
   <b>Nombre:</b>
   <%= @zona.nombre %>
@@ -24,3 +29,5 @@
 
 
 <%= link_to 'Back', zonas_path %>
+</tr>
+</table>

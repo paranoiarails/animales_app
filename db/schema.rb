@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121129173427) do
+ActiveRecord::Schema.define(:version => 20130202172617) do
 
   create_table "animal_images", :force => true do |t|
     t.string   "caption"
@@ -41,6 +41,18 @@ ActiveRecord::Schema.define(:version => 20121129173427) do
     t.integer  "edad"
     t.integer  "zona_id"
     t.text     "veterinario"
+  end
+
+  create_table "articulos", :force => true do |t|
+    t.integer  "animales"
+    t.string   "title"
+    t.text     "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "Picture_file_name"
+    t.string   "Picture_content_type"
+    t.integer  "Picture_file_size"
+    t.datetime "Picture_updated_at"
   end
 
   create_table "chenils", :force => true do |t|
@@ -99,6 +111,17 @@ ActiveRecord::Schema.define(:version => 20121129173427) do
     t.datetime "updated_at",         :null => false
   end
 
+  create_table "menus", :force => true do |t|
+    t.string   "titulo"
+    t.text     "content"
+    t.string   "Picture_file_name"
+    t.string   "Picture_content_type"
+    t.integer  "Picture_file_size"
+    t.datetime "Picture_updated_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "ocupacions", :force => true do |t|
     t.string   "nombre"
     t.datetime "created_at", :null => false
@@ -145,9 +168,9 @@ ActiveRecord::Schema.define(:version => 20121129173427) do
   create_table "relacion_animals", :force => true do |t|
     t.integer  "animal1_id"
     t.integer  "animal2_id"
-    t.integer  "relacion"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.string   "relacion",   :limit => nil
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "searches", :id => false, :force => true do |t|
@@ -155,16 +178,35 @@ ActiveRecord::Schema.define(:version => 20121129173427) do
     t.integer "zona_id"
   end
 
+  create_table "submenus", :force => true do |t|
+    t.integer  "menu_id"
+    t.string   "titulo"
+    t.text     "contenido"
+    t.string   "Picture_file_name"
+    t.string   "Picture_content_type"
+    t.integer  "Picture_file_size"
+    t.datetime "Picture_updated_at"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+  end
+
   create_table "tareas", :force => true do |t|
+    t.integer  "hecho"
+    t.integer  "personaHecho_id"
     t.string   "nombre"
     t.integer  "persona_id"
     t.integer  "zona_id"
     t.integer  "animal_id"
-    t.text     "texto"
     t.integer  "ocupacion_id"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.date     "fecha"
+  end
+
+  create_table "tipos_rels", :force => true do |t|
+    t.string   "nombre"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "zonas", :force => true do |t|

@@ -54,6 +54,7 @@ GEM
       ZenTest (>= 4.4.1)
     autotest-rails (4.1.2)
       ZenTest (~> 4.5)
+    bootstrap-sass (2.1.0.0)
     builder (3.0.3)
     choice (0.1.6)
     cocaine (0.3.1)
@@ -195,6 +196,7 @@ DEPENDENCIES
   annotate!
   autotest
   autotest-rails
+  bootstrap-sass (= 2.1)
   coffee-rails (~> 3.2.1)
   factory_girl_rails (= 1.0)
   gravatar_image_tag (= 0.1.0)

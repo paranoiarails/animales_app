@@ -1,0 +1,44 @@
+<h1>New submenu</h1>
+
+<%= form_for(@submenu) do |f| %>
+  <% if @submenu.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@submenu.errors.count, "error") %> prohibited this submenu from being saved:</h2>
+
+      <ul>
+      <% @submenu.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= @menu %>
+  <% @submenu.menu_id=@menu %>
+  <%= @submenu.menu_id %>
+  <!--div class="field">
+    < f.label :menu_id %><br />
+    < f.number_field :menu_id %>
+  <div-->
+
+  <div class="field">
+    <%= f.label :titulo %><br />
+    <%= f.text_field :titulo %>
+  </div>
+  <div class="field">
+    <%= f.label :contenido %><br />
+    <%= f.text_area :contenido %>
+  </div>
+
+   <div class="field">
+	<%= f.label :Foto %><br />
+  	<%= f.file_field :Picture %>
+  </div> 
+  </br>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+<%= link_to 'Back', submenus_path %>
