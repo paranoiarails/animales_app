@@ -56,6 +56,13 @@ module Pruebaanimales3
 
 # Heroku requires this to be false
 config.assets.initialize_on_precompile=false
+#funcione bootstrap con heroku
+# Precompile *all* assets, except those that start with underscore
+#config.assets.precompile << /(^[^_\/]|\/[^_])[^\/]*$/
+#config.assets.precompile << /(^[^_]|\/[^_])[^\/]*/
+config.assets.precompile << /(^[^_\/]|\/[^_])[^\/]*$/
+
+
 
     # Enable the asset pipeline
     config.assets.enabled = true

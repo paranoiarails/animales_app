@@ -1,5 +1,5 @@
-@import "_bootstrap";
-#wrapper{background#6c8b0a; margin: 0 auto; width: 100%;}
+
+#wrapper{background:#6c8b0a; margin: 0 auto; width: 100%;}
 header{background:white; margin: 0 auto;height: 200px; padding: 10px; width: 98%;border: solid 1px black;}
 #imalogo{float:left; height: 100px; width: 80px; background:green;}
 
