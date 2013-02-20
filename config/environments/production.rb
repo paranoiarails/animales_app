@@ -3,7 +3,8 @@ Pruebaanimales3::Application.configure do
 
   #solved heroku problems;
   #http://stackoverflow.com/questions/7443536/blueprint-screen-css-isnt-precompiled
-  config.assets.precompile += %w( *.css *.js *.png)
+  #config.assets.precompile += %w( *.css *.js *.png *.jpeg)
+config.assets.precompile << /(^[^_\/]|\/[^_])[^\/]*$/
   #app.assets.precompile += %w(*.css *.js)
   config.assets.precompile += %w( blueprint/screen.css blueprint/print.css blueprint/ie.css )
 
@@ -26,6 +27,13 @@ config.serve_static_assets = true
 
   # Don't fallback to assets pipeline if a precompiled asset is missed
   config.assets.compile = false
+
+
+
+#problemas al precompilar imagen.jpeg
+#http://46424.com/question/374091#.USUsDuqlVM0
+#cabio   config.assets.compile = true linea anterior de false a true
+#config.assets.precompile += %w( *.jpeg)
 
   # Generate digests for assets URLs
   config.assets.digest = true
