@@ -4,8 +4,9 @@ Pruebaanimales3::Application.configure do
   #solved heroku problems;
   #http://stackoverflow.com/questions/7443536/blueprint-screen-css-isnt-precompiled
   #config.assets.precompile += %w( *.css *.js *.png *.jpeg)
+  config.assets.precompile += %w(*.jpeg *.png)
 config.assets.precompile << /(^[^_\/]|\/[^_])[^\/]*$/
-  #app.assets.precompile += %w(*.css *.js)
+
   config.assets.precompile += %w( blueprint/screen.css blueprint/print.css blueprint/ie.css )
 
 
