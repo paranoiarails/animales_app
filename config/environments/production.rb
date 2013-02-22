@@ -1,10 +1,12 @@
 Pruebaanimales3::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
+# Heroku requires this to be false
+config.assets.initialize_on_precompile = false
 
   #solved heroku problems;
   #http://stackoverflow.com/questions/7443536/blueprint-screen-css-isnt-precompiled
   #config.assets.precompile += %w( *.css *.js *.png *.jpeg)
-  config.assets.precompile += %w(*.jpeg *.png)
+  config.assets.precompile += %w(*.jpeg *.png *.jpg *.gif)
 config.assets.precompile << /(^[^_\/]|\/[^_])[^\/]*$/
 
   config.assets.precompile += %w( blueprint/screen.css blueprint/print.css blueprint/ie.css )
@@ -27,6 +29,7 @@ config.serve_static_assets = true
   config.assets.compress = true
 
   # Don't fallback to assets pipeline if a precompiled asset is missed
+#http://pastebin.com/Yx0uVcBU dice q true pero no me lo creo mucho
   config.assets.compile = false
 
 

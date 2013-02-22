@@ -77,7 +77,6 @@ jquery-ui.min.js: jquery-ui.min-62fab7113f99de8919f788dfe84039e5.js
 jquery.js: jquery-0a481723685ac4e911702de2f8232dd7.js
 jquery.min.js: jquery.min-266c63ddd3a497532bff116ccd1bd84d.js
 jquery_ujs.js: jquery_ujs-b622ae8bf8201d0766cc779998edfb9f.js
-coffee-script.js: coffee-script-2a8520487f6ab8e241a2a78b0bc6748d.js
 glyphicons-halflings-white.png: glyphicons-halflings-white-13553a5bf21ae3cc374006592488ec64.png
 glyphicons-halflings.png: glyphicons-halflings-ab3144065a860d198f1d7d9a4882640c.png
 bootstrap-affix.js: bootstrap-affix-63010af84cfecb82b07e30b2f9cd7a7a.js

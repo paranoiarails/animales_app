@@ -56,6 +56,8 @@ module Pruebaanimales3
 
 # Heroku requires this to be false
 config.assets.initialize_on_precompile=false
+#precompila imagenes aqui o en production.rb
+  config.assets.precompile += %w(*.jpeg *.png *.jpg *.gif)
 #funcione bootstrap con heroku
 # Precompile *all* assets, except those that start with underscore
 #config.assets.precompile << /(^[^_\/]|\/[^_])[^\/]*$/
